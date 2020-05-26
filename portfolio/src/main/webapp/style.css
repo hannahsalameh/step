@@ -1,15 +1,26 @@
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
-}
+/* ----ALL PAGES---- */
+/* #content {
+  margin-left: 3%;
+  margin-right: 3%;
+
+} */
 html{
     background-color:#F7F7F7;
     color:#3F3F44;
+    font-family: 'Noto Sans JP', sans-serif;
 }
+/* --HEADER INFO-- */
 .header_link{
     text-decoration: none;
     color:#3F3F44;
+}
+.header_container{
+    display:flex;
+    justify-content:flex-start;
+    align-items: center;
+}
+.header_obj{
+    padding-left:3%;
 }
 .header_link:hover{
     color:#CCEABB;
@@ -17,6 +28,24 @@ html{
 #logo{
     height: 50px;
     width:auto;
+}
+/* ----MAIN PAGE----*/
+#main_background{
+    background-image:url("/images/Background.gif");
+    background-position: center;
+    text-align: center;
+    color:#F7F7F7;
+    height: 90vh;
+    width: 98vw;
+    align-content:center;
+    align-self:center;
+    margin:auto;
+}
+#main_content{
+    position:relative;
+    top: 50%;
+    bottom:50%;
+    font-size: 50px;
 }
 #greeting-container {
   margin-top: 20px;

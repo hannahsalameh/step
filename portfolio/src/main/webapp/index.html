@@ -3,25 +3,23 @@
   <head>
     <meta charset="UTF-8">
     <title>My Portfolio</title>
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <header>
-      <table class="header">
-        <tr>
-             <td><a href="index.html"> <img src="/images/favicon.png" id="logo"> </a></td>
-             <td><a href="projects.html" class="header_link"><h2> PROJECTS </h2></a></td> 
-             <td><a href="designs.html" class="header_link"><h2> DESIGNS </h2></a></td>
-             <td><a href="about.html" class="header_link"><h2> ABOUT </h2></a></td>
-        <tr>
-      </table>
+  <header class="header_container">
+        <div class="header_obj"><a href="index.html"> <img src="/images/favicon.png" id="logo"></a></div>
+        <div class="header_obj"><a href="projects.html" class="header_link"><h3> PROJECTS </h3></a></div>
+        <div class="header_obj"><a href="designs.html" class="header_link"><h3> DESIGNS </h3></a></div>
+        <div class="header_obj"><a href="about.html" class="header_link"><h3> ABOUT </h3></a></div>
   </header>
   <body>
     <div id="content">
-      <h1>Hannah's Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Hello! My name is Hannah Salameh and I'm a rising sophomore at the University of Michigan. </p>
-      <img src="/images/hannah_img.jpg">
+        <div id="main_background">
+            <h1 id="main_content">Hannah Salameh</h1>
+        </div>
+      <p>Hello! My name is Hannah Salameh and I'm a rising sophomore at the University of Michigan. I created this site to showcase my projects within CS as well as some of my design projects I'm currently passionate about.</p>
       <p>Click here to get a random message:</p>
       <button onclick="addRandomGreeting()">Hello</button>
       <div id="greeting-container"></div>
