@@ -3,7 +3,21 @@
   margin-right: auto;
   width: 650px;
 }
-
+html{
+    background-color:#F7F7F7;
+    color:#3F3F44;
+}
+.header_link{
+    text-decoration: none;
+    color:#3F3F44;
+}
+.header_link:hover{
+    color:#CCEABB;
+}
+#logo{
+    height: 50px;
+    width:auto;
+}
 #greeting-container {
   margin-top: 20px;
 }
