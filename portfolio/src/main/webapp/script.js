@@ -28,37 +28,64 @@ function addRandomGreeting() {
 }
 
 function expandDesign(clickedId){
+//whenever you click an image on the description page, this pulls up more images in the category alongside descriptions
 const designPage = document.getElementById('design_container');
 designPage.innerHTML = "";
-console.log(clickedId);
+console.log(clickedId); //REMOVE WHEN DONE
+
+//descriptions for every single page that can be clicked on
+const descriptions = 
+    ["Parasite is a fake band created by me and my friends back home."  
+    +"While we have not created any music yet (hence the fake band), "
+    +"I have created plenty of promotional material for us. "
+    +"Hopefully one day the band can become a reality.",
+    "I primarily work in traditional art, as seen by this selection of projects."
+    +"Most of this art was created for my AP Art portfolio, but some pieces"
+    +"have been created since then. Hopefully over this break I can do more"
+    +"traditional art."
+    ]
+
 if(clickedId == "fake_band"){
-console.log("ok we in here");
-//initial description
-var title = document.createElement("h1");
-var titleText = document.createTextNode("Parasite");
-title.appendChild(titleText);
-var desc = document.createElement("p");
-desc.className = "main_desc";
-var descText = document.createTextNode("Parasite is a fake band created by me and my friends back home. While we have not created any music yet (hence the fake band), I have created plenty of promotional material for us. Hopefully one day the band can become a reality.");
-desc.appendChild(descText);
-designPage.appendChild(title);
-designPage.appendChild(descText);
-//creating the picture and description layout
-var outer_div = document.createElement("div");
-outer_div.className = "column_disp";
-var child_div = document.createElement("div");
-child_div.className = "row_disp";
-var img_div = document.createElement("div");
-img_div.className = "expanded_img";
-img_div.id = "fake_band";
-var p_tag = document.createElement("p");
-p_tag.className = "description";
-var descriptionNode = document.createTextNode("This first image was created when messing around with shape language and what a record looks like. If this album were real, this would be our first record.");
-p_tag.appendChild(descriptionNode);
-child_div.appendChild(img_div);
-child_div.appendChild(p_tag);
-outer_div.appendChild(child_div);
-designPage.appendChild(outer_div);
+    //initial description
+    var title = document.createElement("h1");
+    var titleText = document.createTextNode("Parasite");
+    title.appendChild(titleText);
+    var desc = document.createElement("p");
+    desc.className = "main_desc";
+    var descText = document.createTextNode(descriptions[0]);
+    desc.appendChild(descText);
+    designPage.appendChild(title);
+    designPage.appendChild(descText);
+
+    //creating the picture and description layout
+    var outer_div = document.createElement("div");
+    outer_div.className = "column_disp";
+    const img_descriptions = 
+        [
+            "The first image is of a record I designed while playing with shape language."
+            + "While simple, it utilizes our primary color scheme of red, yellow, and green"
+            + "and was really fun to make. Also, the drop shadow makes it really pop. If we"
+            + "were a real band, this would probably be the design for our vinyls.",
+            "placeholder",
+            "placeholder"
+        ];
+    const img_ids = 
+        ["fake_band","fake_band2", "fake_band3"];
+    for(var i = 0; i < img_ids.length; ++i){
+        var child_div = document.createElement("div");
+        child_div.className = "row_disp";
+        var img_div = document.createElement("div");
+        img_div.className = "expanded_img";
+        img_div.id = img_ids[i];
+        var p_tag = document.createElement("p");
+        p_tag.className = "description";
+        var descriptionNode = document.createTextNode(img_descriptions[i]);
+        p_tag.appendChild(descriptionNode);
+        child_div.appendChild(img_div);
+        child_div.appendChild(p_tag);
+        outer_div.appendChild(child_div);
+        designPage.appendChild(outer_div);
+    }
 }
 
 }
