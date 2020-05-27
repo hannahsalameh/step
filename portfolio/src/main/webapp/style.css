@@ -106,3 +106,38 @@ button:active{
     min-width:100px;
     object-fit:cover;
 }
+
+/* ---- DESIGN PAGE ---- */
+#design_homepage{
+    display:flex;
+    flex-wrap:wrap;
+}
+#fake_band{
+    background-image:url(/images/record.png);
+}
+.design_img{
+    background-size:30vh auto;
+    background-repeat:no-repeat;
+    background-position: center;
+    margin-left:3%;
+    height: 30vh;
+    position:absolute;
+    width:30vh;
+}
+.design_img:hover{
+    opacity:.5;
+}
+.design_img:hover > .design_text {
+    visibility: visible;
+}
+.design_text {
+    visibility: hidden;
+    text-transform:uppercase;
+    text-align:center;
+    align-self:center;
+    font-size:20px;
+    text-decoration:bold;
+    position:relative;
+    top: 10vh;
+    color:#F7F7F7;
+}
