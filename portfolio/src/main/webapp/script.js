@@ -52,8 +52,8 @@ function addRandomFact(){
     const fact = facts[Math.floor(Math.random()*facts.length)];
     const factContainer = document.getElementById('fact-container');
     factContainer.innerHTML = "";
-    var tag = document.createElement("p");
-    var factTxt = document.createTextNode(fact);
-    tag.appendChild(factTxt);
-    factContainer.appendChild(tag);
+    var p_tag = document.createElement("p");
+    var factTextNode = document.createTextNode(fact);
+    tag.appendChild(factTextNode);
+    factContainer.appendChild(p_tag);
 }
