@@ -44,10 +44,21 @@ function addRandomFact(){
     'Hannah\'s first concert was Beyonce.',
     'Hannah was NOT an ugly baby, but she was an ugly middle schooler.',
     'Hannah has 10 fingers and 10 toes.',
-    'Hannah can trace her ancestory back to 1521.',
+    'Hannah can trace her ancestory back to 1521. None of her ancestors are historically relevant, though.',
     'Hannah has been to more countries than states (despite living here her whole life).',
     'At one point, Hannah spoke passable Mandarin. That point is not now, sadly.',
-    'Hannah thinks she\'s funny, but thats debatable'
+    'Hannah thinks she\'s funny, but thats debatable',
+    'Hannah\'s favorite singer is Lorde and hopes she comes back soon',
+    'In midde school, Hannah was occasionally confused for Hannah Montana but she doesn\'t know why.',
+    'Hannah has a 5 day streak on Duolingo',
+    'Hannah has completed the pokedex twice, once in Pokemon Pearl and once in Pokemon Sun.',
+    'Hannah really likes Jet Set Radio, even though she\'s played for 5 years and still hasn\'t finished the game.',
+    'Hannah has a very active twitter, but is not funny enough to have followers.',
+    'Hannah has owned 6 chickens in her life, despite living in Southern California.',
+    'Hannah sometimes gets confused between Miami and Malibu despite living 2 hours from Malibu.',
+    'Hannah has met Tony Hawk and the voice actor for Spongebob\'s grandma.',
+    'Hannah was at the livetaping of a nickelodeon show, but was so disinterested that the camera never filmed her.',
+    'In the last 3 months, Hannah has eaten 13 pounds of m&ms'
     ];
     const fact = facts[Math.floor(Math.random()*facts.length)];
     const factContainer = document.getElementById('fact-container');
