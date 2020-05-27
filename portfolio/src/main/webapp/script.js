@@ -26,6 +26,43 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+function expandDesign(clickedId){
+const designPage = document.getElementById('design_container');
+designPage.innerHTML = "";
+console.log(clickedId);
+if(clickedId == "fake_band"){
+console.log("ok we in here");
+//initial description
+var title = document.createElement("h1");
+var titleText = document.createTextNode("Parasite");
+title.appendChild(titleText);
+var desc = document.createElement("p");
+desc.className = "main_desc";
+var descText = document.createTextNode("Parasite is a fake band created by me and my friends back home. While we have not created any music yet (hence the fake band), I have created plenty of promotional material for us. Hopefully one day the band can become a reality.");
+desc.appendChild(descText);
+designPage.appendChild(title);
+designPage.appendChild(descText);
+//creating the picture and description layout
+var outer_div = document.createElement("div");
+outer_div.className = "column_disp";
+var child_div = document.createElement("div");
+child_div.className = "row_disp";
+var img_div = document.createElement("div");
+img_div.className = "expanded_img";
+img_div.id = "fake_band";
+var p_tag = document.createElement("p");
+p_tag.className = "description";
+var descriptionNode = document.createTextNode("This first image was created when messing around with shape language and what a record looks like. If this album were real, this would be our first record.");
+p_tag.appendChild(descriptionNode);
+child_div.appendChild(img_div);
+child_div.appendChild(p_tag);
+outer_div.appendChild(child_div);
+designPage.appendChild(outer_div);
+}
+
+}
+
 function addRandomFact(){
     const facts = 
     ['Hannah has tried to learn arabic 10 times. She still does not know it.',

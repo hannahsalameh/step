@@ -150,3 +150,30 @@ button:active{
     top: 10vh;
     color:#f7f7f7;
 }
+
+/* After an image is clicked */
+.column_disp{
+    display:flex;
+    flex-direction:column;
+}
+.row_disp{
+    display:flex;
+    flex-direction:row;
+}
+.expanded_img{
+    background-size:60vh auto;
+    background-repeat:no-repeat;
+    background-position: center;
+    margin-left:3%;
+    height: 60vh;
+    width: 60vh;
+}
+.description{
+    max-width:30vw;
+    padding-left:3%;
+}
+.main_desc{
+    padding-bottom:3%;
+    max-width: 70vh;
+    text-align:center;
+}
