@@ -30,7 +30,7 @@ function addRandomFact(){
     const facts = 
     ['Hannah has tried to learn arabic 10 times. She still does not know it.',
     'Hannah was once a girl scout!',
-    'Hannah has broken 1 bone and it from falling off a swing set.',
+    'Hannah has only ever broken 1 bone, and it was by falling off a swing set.',
     'Hannah has 1 sibling: a younger sister named Emily.',
     'Hannah has played almost every pokemon game up onto USUM.',
     'Hannah can not get goosebumps and is not quite sure why not.',
