@@ -1,11 +1,23 @@
 /* ----ALL PAGES---- */
 html{
-    background-color:#F7F7F7;
+    background-color:#f7f7f7;
     color:#3F3F44;
     font-family: 'Noto Sans JP', sans-serif;
 }
 a{
     text-decoration:none;
+}
+button{
+    background-color:#CCEABB;
+    color:#3F3F44;
+    box-shadow: 5px 5px 2px grey;
+    border:none;
+    font-family: 'Noto Sans JP', sans-serif;
+    padding: 5px 5px 5px 5px;
+    border-radius: 5%;
+}
+button:active{
+    background-color:#b6cda8;
 }
 /* --HEADER INFO-- */
 .header_link{
@@ -20,7 +32,7 @@ a{
     padding-left:3%;
 }
 .header_link:hover{
-    color:#CCEABB;
+    color:#b6cda8;
 }
 #logo{
     height: 50px;
@@ -52,17 +64,20 @@ a{
 }
 
 /* ----ABOUT PAGE---- */
+
 .about_container{
     display:flex;
     flex-direction:row;
     justify-content: space-between;
-    flex-grow:wrap
+    flex-wrap:wrap;
 }
 #images_container{
     display:flex;
     flex-direction:column;
     flex-grow:1;
     margin-left:20px;
+    max-width:45%;
+    min-width:500px;
 }
 .social_icon{
     height:30px;
@@ -83,7 +98,11 @@ a{
     flex-grow:1;
     padding-left:2%;
     padding-right:2%;
+    max-width:45%;
+    min-width:500px;
 }
 #profile_pic{
     border-radius:5%;
+    min-width:100px;
+    object-fit:cover;
 }
