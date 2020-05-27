@@ -30,7 +30,7 @@ function addRandomFact(){
     const facts = 
     ['Hannah has tried to learn arabic 10 times. She still does not know it.',
     'Hannah was once a girl scout!',
-    'Hannah has broken 1 bone and it from falling off a swing set.',
+    'Hannah has only ever broken 1 bone, and it was by falling off a swing set.',
     'Hannah has 1 sibling: a younger sister named Emily.',
     'Hannah has played almost every pokemon game up onto USUM.',
     'Hannah can not get goosebumps and is not quite sure why not.',
@@ -63,8 +63,8 @@ function addRandomFact(){
     const fact = facts[Math.floor(Math.random()*facts.length)];
     const factContainer = document.getElementById('fact-container');
     factContainer.innerHTML = "";
-    var tag = document.createElement("p");
-    var factTxt = document.createTextNode(fact);
-    tag.appendChild(factTxt);
-    factContainer.appendChild(tag);
+    var p_tag = document.createElement("p");
+    var factTextNode = document.createTextNode(fact);
+    tag.appendChild(factTextNode);
+    factContainer.appendChild(p_tag);
 }
