@@ -110,10 +110,20 @@ button:active{
 /* ---- DESIGN PAGE ---- */
 #design_homepage{
     display:flex;
-    flex-wrap:wrap;
+    flex-direction:row;
 }
 #fake_band{
     background-image:url(/images/record.png);
+}
+#eas{
+    background-image:url(/images/easSweatshirt.png);
+}
+#traditional{
+    background-image:url(Passionfruit.png);
+    /*replace once photograph art*/
+}
+#misc{
+    background-image:url(/images/personalShirt.png);
 }
 .design_img{
     background-size:30vh auto;
@@ -121,7 +131,6 @@ button:active{
     background-position: center;
     margin-left:3%;
     height: 30vh;
-    position:absolute;
     width:30vh;
 }
 .design_img:hover{
@@ -139,5 +148,5 @@ button:active{
     text-decoration:bold;
     position:relative;
     top: 10vh;
-    color:#F7F7F7;
+    color:#f7f7f7;
 }
