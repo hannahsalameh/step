@@ -124,8 +124,11 @@ button:active{
 #eas{
     background-image:url(/images/easSweatshirt.png);
 }
+#eas2012{
+    background-image:url(/images/eas2012.png);
+}
 #traditional{
-    background-image:url(Passionfruit.png);
+    background-image:url(/images/Passionfruit.png);
     /*replace once photograph art*/
 }
 #misc{

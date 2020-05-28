@@ -33,61 +33,122 @@ const designPage = document.getElementById('design_container');
 designPage.innerHTML = "";
 console.log(clickedId); //REMOVE WHEN DONE
 
-//descriptions for every single page that can be clicked on
-const descriptions = 
-    ["Parasite is a fake band created by me and my friends back home."  
-    +"While we have not created any music yet (hence the fake band), "
-    +"I have created plenty of promotional material for us. "
-    +"Hopefully one day the band can become a reality.",
-    "I primarily work in traditional art, as seen by this selection of projects."
-    +"Most of this art was created for my AP Art portfolio, but some pieces"
-    +"have been created since then. Hopefully over this break I can do more"
-    +"traditional art."
-    ]
+//[title, description]
+var page_heading = [];
+var img_ids_desc = [];
 
 if(clickedId == "fake_band"){
-    //initial description
-    var title = document.createElement("h1");
-    var titleText = document.createTextNode("Parasite");
-    title.appendChild(titleText);
-    var desc = document.createElement("p");
-    desc.className = "main_desc";
-    var descText = document.createTextNode(descriptions[0]);
-    desc.appendChild(descText);
-    designPage.appendChild(title);
-    designPage.appendChild(descText);
-
-    //creating the picture and description layout
-    var outer_div = document.createElement("div");
-    outer_div.className = "column_disp";
-    const img_descriptions = 
-        [
+    page_heading = [
+        "Parasite",
+        "Parasite is a fake band created by me and my friends back home."  
+        +"While we have not created any music yet (hence the fake band), "
+        +"I have created plenty of promotional material for us. "
+        +"Hopefully one day the band can become a reality.",
+        "I primarily work in traditional art, as seen by this selection of projects."
+        +"Most of this art was created for my AP Art portfolio, but some pieces"
+        +"have been created since then. Hopefully over this break I can do more"
+        +"traditional art."
+    ]
+    img_ids_desc = [
+        [   "fake_band",
             "The first image is of a record I designed while playing with shape language."
             + "While simple, it utilizes our primary color scheme of red, yellow, and green"
             + "and was really fun to make. Also, the drop shadow makes it really pop. If we"
-            + "were a real band, this would probably be the design for our vinyls.",
-            "placeholder",
-            "placeholder"
-        ];
-    const img_ids = 
-        ["fake_band","fake_band2", "fake_band3"];
-    for(var i = 0; i < img_ids.length; ++i){
-        var child_div = document.createElement("div");
+            + "were a real band, this would probably be the design for our vinyls."
+        ],
+        [   "fake_band2",
+            "The second image is a mockup of an album cover. The title of the album, Highway to"
+            + "Nowhere, is inspired from the classic song Highway to Hell, but with a more indie vibe."
+            + "This cover art mockup is where I solidified the album's color scheme and decided on the"
+            + "overall vibe of the art I wanted to create for all subsequent art."
+        ],
+        [
+            "fake_band3",
+            "This final image is actually the first promotional art I made. This image is a mockup of"
+            + "a potential band poster that we created with the dream we would play at the Observatory in San Diego."
+            + "This poster is where I decided on the overall shape language of the band, with its trippy,"
+            + " abstract shapes and gradiating color scheme. This is also the first place the tiny skull comes up,"
+            + "which is an overall symbol for the band Pesticide, similar to how a skull is a typical symbol"
+            + "for danger and a toxic substance."
+        ]
+    ]
+}
+else if(clickedId == "eas"){
+    page_heading =  [
+        "Epsilon Alpha Sigma",
+        "Epsilon Alpha Sigma is the sorority I am a part of at the University of Michigan. This semester"
+        + "I have taken over the position of apparel chair, and therefore have a lot of new designs. "
+        + "Since we are only allowed to wear our colors (white, purple, and lavender), creating new"
+        + "designs is a challenge. This challenge forces me to make more creative, inventive designs."
+        + "Epsilon Alpha Sigma is the first and only Arab sorority in the nation and has chapter at "
+        + "UMich, UCLA, UNLV, UC Riverside, and UC Davis."
+    ]
+    img_ids_desc = [
+        [
+            "eas",
+            "This design is my current favorite clothing design I've made. The design is inspired by"
+            + "the brand Bad Monday Apparel. This design features a dove and makes use of text manipulation"
+            + "to create an appealing, balanced design."
+        ],
+        [
+            "eas2012",
+            "This is actually the first design I made for Epsilon Alpha Sigma. This design features "
+            + "our national founding year in arabic. I was inspired by vintage sports jerseys when designing "
+            + "the numbers. Also, I chose to use arabic both because of our identity as an Arabic sorority and "
+            + "because of the shape language of the arabic numerals allows for more interesting designs than 2012 "
+            + "would have."
+        ]
+    ]
+
+}
+else if(clickedId == "traditional"){
+    page_heading = [
+        "Traditional Art",
+        "This page is to showcase my favorite traditional art pieces. While I mainly work in traditional art,"
+        + "a lot of these pieces are outdated as they were made for my AP Art portfolio. Therefore, I am "
+        + "only choosing to showcase my best work. Hopefully, over the summer I will have more time to do traditional "
+        + "art and add to this page."
+    ]
+}
+else if(clickedId == "misc"){
+    page_heading = [
+        "Miscellaneous Art",
+        "This page features all the miscellaneous designs that do not fit in the previous three categories. "
+        + "As a result of their general randomness, most of these designs can be found on my redbubble. Please "
+        + "make sure to check it out if you like any of these designs! Most of these designs were made in either "
+        + "Procreate or Adobe Illustrator."
+    ]
+
+}
+
+const title = document.createElement("h1");
+const titleText = document.createTextNode(page_heading[0]);
+title.appendChild(titleText);
+const desc = document.createElement("p");
+desc.className = "main_desc";
+const descText = document.createTextNode(page_heading[1]);
+desc.appendChild(descText);
+designPage.appendChild(title);
+designPage.appendChild(descText);
+
+var outer_div = document.createElement("div");
+outer_div.className = "column_disp";
+console.log(img_ids_desc.length);
+for(var i = 0; i < img_ids_desc.length; ++i){
+    var child_div = document.createElement("div");
         child_div.className = "row_disp";
         var img_div = document.createElement("div");
         img_div.className = "expanded_img";
-        img_div.id = img_ids[i];
+        img_div.id = img_ids_desc[i][0];
         var p_tag = document.createElement("p");
         p_tag.className = "description";
-        var descriptionNode = document.createTextNode(img_descriptions[i]);
+        var descriptionNode = document.createTextNode(img_ids_desc[i][1]);
         p_tag.appendChild(descriptionNode);
         child_div.appendChild(img_div);
         child_div.appendChild(p_tag);
         outer_div.appendChild(child_div);
         designPage.appendChild(outer_div);
-    }
 }
-
 }
 
 function addRandomFact(){
