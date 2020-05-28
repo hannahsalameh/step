@@ -135,6 +135,13 @@ else if(clickedId == "misc"){
     ]
 }
 
+var button = document.createElement("button");
+var buttonText = document.createTextNode("Back");
+button.appendChild(buttonText);
+button.className = "back_btn";
+button.addEventListener('click', function(){ location.reload();}, false);
+designPage.appendChild(button);
+
 const title = document.createElement("h1");
 const titleText = document.createTextNode(page_heading[0]);
 title.appendChild(titleText);
@@ -147,7 +154,6 @@ designPage.appendChild(descText);
 
 var outer_div = document.createElement("div");
 outer_div.className = "column_disp";
-console.log(img_ids_desc.length);
 for(var i = 0; i < img_ids_desc.length; ++i){
     var child_div = document.createElement("div");
         child_div.className = "row_disp";
@@ -164,6 +170,8 @@ for(var i = 0; i < img_ids_desc.length; ++i){
         designPage.appendChild(outer_div);
 }
 }
+
+
 
 function addRandomFact(){
     const facts = 
