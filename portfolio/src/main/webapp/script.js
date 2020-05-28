@@ -32,18 +32,16 @@ function expandDesign(clickedId){
     const designPage = document.getElementById('design_container');
     designPage.innerHTML = "";
 
-    //[title, description]
-    var page_heading = [];
-    var img_ids_desc = [];
+  var page_heading = "";
+  var page_heading_desc = "";
+  var img_ids_desc = [];
 
     if(clickedId == "fake_band"){
-        page_heading = [
-            "Parasite",
-            `Parasite is a fake band created by me and my friends back home. 
-            While we have not created any music yet (hence the fake band), 
-            I have created plenty of promotional material for us. 
-            Hopefully one day the band can become a reality.`
-        ]
+        page_heading = "Parasite"
+        page_heading_desc = `Parasite is a fake band created by me and my friends back home. 
+                              While we have not created any music yet (hence the fake band), 
+                              I have created plenty of promotional material for us. 
+                              Hopefully one day the band can become a reality.`;
         img_ids_desc = [
             [   "fake_band",
                 `The first image is of a record I designed while playing with shape language.
@@ -69,15 +67,13 @@ function expandDesign(clickedId){
         ]
     }
     else if(clickedId == "eas"){
-        page_heading =  [
-            "Epsilon Alpha Sigma",
-            `Epsilon Alpha Sigma is the sorority I am a part of at the University of Michigan. This semester 
-            I have taken over the position of apparel chair, and therefore have a lot of new designs. 
-            Since we are only allowed to wear our colors (white, purple, and lavender), creating new 
-            designs is a challenge. This challenge forces me to make more creative, inventive designs. 
-            Epsilon Alpha Sigma is the first and only Arab sorority in the nation and has chapters at 
-            UMich, UCLA, UNLV, UC Riverside, and UC Davis.`
-        ]
+        page_heading = "Epsilon Alpha Sigma";
+        page_heading_desc = `Epsilon Alpha Sigma is the sorority I am a part of at the University of Michigan. This semester 
+                            I have taken over the position of apparel chair, and therefore have a lot of new designs. 
+                            Since we are only allowed to wear our colors (white, purple, and lavender), creating new 
+                            designs is a challenge. This challenge forces me to make more creative, inventive designs. 
+                            Epsilon Alpha Sigma is the first and only Arab sorority in the nation and has chapters at 
+                            UMich, UCLA, UNLV, UC Riverside, and UC Davis.`;
         img_ids_desc = [
             [
                 "eas",
@@ -97,22 +93,18 @@ function expandDesign(clickedId){
 
     }
     else if(clickedId == "traditional"){
-        page_heading = [
-            "Traditional Art",
-            `This page is to showcase my favorite traditional art pieces. While I mainly work in traditional art, 
+        page_heading = "Traditional Art";
+        page_heading_desc = `This page is to showcase my favorite traditional art pieces. While I mainly work in traditional art, 
             a lot of these pieces are outdated as they were made for my AP Art portfolio. Therefore, I am 
             only choosing to showcase my best work. Hopefully, over the summer I will have more time to do traditional 
-            art and add to this page.`
-        ]
+            art and add to this page.`;
     }
     else if(clickedId == "misc"){
-        page_heading = [
-            "Miscellaneous Art",
-            `This page features all the miscellaneous designs that do not fit in the previous three categories. 
-            As a result of their general randomness, most of these designs can be found on my redbubble. Please 
-            make sure to check it out if you like any of these designs! Most of these designs were made in either 
-            Procreate or Adobe Illustrator.`
-        ]
+           page_heading = "Miscellaneous Art";
+           page_heading_desc = `This page features all the miscellaneous designs that do not fit in the previous three categories. 
+                            As a result of their general randomness, most of these designs can be found on my redbubble. Please 
+                            make sure to check it out if you like any of these designs! Most of these designs were made in either 
+                            Procreate or Adobe Illustrator.`;
         img_ids_desc = [
             [
                 "misc", 
@@ -138,11 +130,11 @@ function expandDesign(clickedId){
     designPage.appendChild(button);
 
     const title = document.createElement("h1");
-    const titleText = document.createTextNode(page_heading[0]);
+    const titleText = document.createTextNode(page_heading);
     title.appendChild(titleText);
     const desc = document.createElement("p");
     desc.className = "main_desc";
-    const descText = document.createTextNode(page_heading[1]);
+    const descText = document.createTextNode(page_heading_desc);
     desc.appendChild(descText);
     designPage.appendChild(title);
     designPage.appendChild(descText);
