@@ -1,15 +1,15 @@
 /* ----ALL PAGES---- */
 html{
     background-color:#f7f7f7;
-    color:#3F3F44;
+    color:#3f3f44;
     font-family: 'Noto Sans JP', sans-serif;
 }
 a{
     text-decoration:none;
 }
 button{
-    background-color:#CCEABB;
-    color:#3F3F44;
+    background-color:#cceabb;
+    color:#3f3f44;
     box-shadow: 5px 5px 2px grey;
     border:none;
     font-family: 'Noto Sans JP', sans-serif;
@@ -21,7 +21,7 @@ button:active{
 }
 /* --HEADER INFO-- */
 .header_link{
-    color:#3F3F44;
+    color:#3f3f44;
 }
 .header_container{
     display:flex;
@@ -46,7 +46,7 @@ button:active{
     background-image:url("/images/Background.gif");
     background-position: center;
     text-align: center;
-    color:#F7F7F7;
+    color:#f7f7f7;
     height: 90vh;
     width: 98vw;
     align-content:center;
@@ -125,6 +125,7 @@ button:active{
 #eas{
     background-image:url(/images/easSweatshirt.png);
 }
+<<<<<<< HEAD
 #eas2012{
     background-image:url(/images/eas2012.png);
 }
