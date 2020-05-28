@@ -7,9 +7,13 @@ html{
 a{
     text-decoration:none;
 }
+a:hover{
+    color:#b6cda8;
+}
 button{
     background-color:#cceabb;
     color:#3f3f44;
+    font-size:15px;
     box-shadow: 5px 5px 2px grey;
     border:none;
     font-family: 'Noto Sans JP', sans-serif;
@@ -125,19 +129,23 @@ button:active{
 #eas{
     background-image:url(/images/easSweatshirt.png);
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> a860a0720e16b35203782f65a5ef460af105e330
 #eas2012{
     background-image:url(/images/eas2012.png);
 }
 #traditional{
-    background-image:url();
-    /*replace once photograph art*/
+    background-image:url(/images/buttoning.jpeg);
+}
+#traditional2{
+    background-image:url(/images/purple.jpeg);
+}
+#traditional3{
+    background-image:url(/images/bike.jpg)
 }
 #passionFruit{
     background-image:url(/images/Passionfruit.png);
+}
+#face{
+    background-image:url(/images/face.png);
 }
 #misc{
     background-image:url(/images/personalShirt.png);

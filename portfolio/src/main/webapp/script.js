@@ -98,6 +98,26 @@ function expandDesign(clickedId){
             a lot of these pieces are outdated as they were made for my AP Art portfolio. Therefore, I am 
             only choosing to showcase my best work. Hopefully, over the summer I will have more time to do traditional 
             art and add to this page.`;
+        img_ids_desc = [
+            [
+                "traditional",
+                `This was a piece originally created for my AP Art portfolio. I liked the idea of building up a shape using
+                 only simple color schemes and simple shapes. The face was cut off to symbolize the mundaneness of the action;
+                  the person doing the act does not matter as much as the act itself. The color scheme was also specifically chosen 
+                  since the normalicy of the act is not something that should be taken bad, but instead draw mystery to the subject.`
+            ],
+            [
+                "traditional2",
+                `This is my most recent pen piece. One of my friends was playing guitar on a snapchat video, and I quickly
+                did this piece to commemorate the moment. Again, the face is cut off to show that the person does not matter as 
+                much as the act. By cropping out the face, you create a mystery that only the artist knows the answer to.`
+            ],
+            [
+                "traditional3",
+                `This is my first and biggest pen piece. There is no deeper meaning here, its just a bike laying down
+                on its side.`
+            ]
+        ]
     }
     else if(clickedId == "misc"){
            page_heading = "Miscellaneous Art";
@@ -118,6 +138,12 @@ function expandDesign(clickedId){
                 `This design was made as a represention of how the song Passionfruit by Drake sounds to me. 
                 This piece is meant to be worn as a shirt design and while the design was made with procreate, the 
                 text was done with illustrator.`
+            ],
+            [
+                "face",
+                `This design was made as an immitation of Obey Giant's work. I used illustrator in order to make it, 
+                but it was mainly done by hand, not through effects. This is my first realistic project on illustrator 
+                and it makes use of my classic color scheme of green and dark red. `
             ]
         ]
     }
