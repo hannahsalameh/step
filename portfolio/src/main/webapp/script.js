@@ -40,63 +40,59 @@ var img_ids_desc = [];
 if(clickedId == "fake_band"){
     page_heading = [
         "Parasite",
-        "Parasite is a fake band created by me and my friends back home."  
-        +"While we have not created any music yet (hence the fake band), "
-        +"I have created plenty of promotional material for us. "
-        +"Hopefully one day the band can become a reality.",
-        "I primarily work in traditional art, as seen by this selection of projects."
-        +"Most of this art was created for my AP Art portfolio, but some pieces"
-        +"have been created since then. Hopefully over this break I can do more"
-        +"traditional art."
+        `Parasite is a fake band created by me and my friends back home. 
+        While we have not created any music yet (hence the fake band), 
+        I have created plenty of promotional material for us. 
+        Hopefully one day the band can become a reality.`
     ]
     img_ids_desc = [
         [   "fake_band",
-            "The first image is of a record I designed while playing with shape language."
-            + "While simple, it utilizes our primary color scheme of red, yellow, and green"
-            + "and was really fun to make. Also, the drop shadow makes it really pop. If we"
-            + "were a real band, this would probably be the design for our vinyls."
+            `The first image is of a record I designed while playing with shape language.
+            While simple, it utilizes our primary color scheme of red, yellow, and green 
+            and was really fun to make. Also, the drop shadow makes it really pop. If we 
+            were a real band, this would probably be the design for our vinyls.`
         ],
         [   "fake_band2",
-            "The second image is a mockup of an album cover. The title of the album, Highway to"
-            + "Nowhere, is inspired from the classic song Highway to Hell, but with a more indie vibe."
-            + "This cover art mockup is where I solidified the album's color scheme and decided on the"
-            + "overall vibe of the art I wanted to create for all subsequent art."
+            `The second image is a mockup of an album cover. The title of the album, Highway to 
+            Nowhere, is inspired from the classic song Highway to Hell, but with a more indie vibe. 
+            This cover art mockup is where I solidified the album's color scheme and decided on the 
+            overall vibe of the art I wanted to create for all subsequent art.`
         ],
         [
             "fake_band3",
-            "This final image is actually the first promotional art I made. This image is a mockup of"
-            + "a potential band poster that we created with the dream we would play at the Observatory in San Diego."
-            + "This poster is where I decided on the overall shape language of the band, with its trippy,"
-            + " abstract shapes and gradiating color scheme. This is also the first place the tiny skull comes up,"
-            + "which is an overall symbol for the band Pesticide, similar to how a skull is a typical symbol"
-            + "for danger and a toxic substance."
+            `This final image is actually the first promotional art I made. This image is a mockup of 
+            a potential band poster that we created with the dream we would play at the Observatory in San Diego. 
+            This poster is where I decided on the overall shape language of the band, with its trippy, 
+             abstract shapes and gradiating color scheme. This is also the first place the tiny skull comes up, 
+            which is an overall symbol for the band Pesticide, similar to how a skull is a typical symbol 
+            for danger and a toxic substance.`
         ]
     ]
 }
 else if(clickedId == "eas"){
     page_heading =  [
         "Epsilon Alpha Sigma",
-        "Epsilon Alpha Sigma is the sorority I am a part of at the University of Michigan. This semester"
-        + "I have taken over the position of apparel chair, and therefore have a lot of new designs. "
-        + "Since we are only allowed to wear our colors (white, purple, and lavender), creating new"
-        + "designs is a challenge. This challenge forces me to make more creative, inventive designs."
-        + "Epsilon Alpha Sigma is the first and only Arab sorority in the nation and has chapters at "
-        + "UMich, UCLA, UNLV, UC Riverside, and UC Davis."
+        `Epsilon Alpha Sigma is the sorority I am a part of at the University of Michigan. This semester 
+        I have taken over the position of apparel chair, and therefore have a lot of new designs. 
+        Since we are only allowed to wear our colors (white, purple, and lavender), creating new 
+        designs is a challenge. This challenge forces me to make more creative, inventive designs. 
+        Epsilon Alpha Sigma is the first and only Arab sorority in the nation and has chapters at 
+        UMich, UCLA, UNLV, UC Riverside, and UC Davis.`
     ]
     img_ids_desc = [
         [
             "eas",
-            "This design is my current favorite clothing design I've made. The design is inspired by"
-            + "the brand Bad Monday Apparel. This design features a dove and makes use of text manipulation"
-            + "to create an appealing, balanced design."
+            `This design is my current favorite clothing design I've made. The design is inspired by 
+            the brand Bad Monday Apparel. This design features a dove and makes use of text manipulation 
+            to create an appealing, balanced design. `
         ],
         [
             "eas2012",
-            "This is actually the first design I made for Epsilon Alpha Sigma. This design features "
-            + "our national founding year in arabic. I was inspired by vintage sports jerseys when designing "
-            + "the numbers. Also, I chose to use arabic both because of our identity as an Arabic sorority and "
-            + "because of the shape language of the arabic numerals allows for more interesting designs than 2012 "
-            + "would have."
+            `This is actually the first design I made for Epsilon Alpha Sigma. This design features 
+            our national founding year in arabic. I was inspired by vintage sports jerseys when designing 
+            the numbers. Also, I chose to use arabic both because of our identity as an Arabic sorority and 
+            because of the shape language of the arabic numerals allows for more interesting designs than 2012 
+            would have.`
         ]
     ]
 
@@ -104,33 +100,33 @@ else if(clickedId == "eas"){
 else if(clickedId == "traditional"){
     page_heading = [
         "Traditional Art",
-        "This page is to showcase my favorite traditional art pieces. While I mainly work in traditional art,"
-        + "a lot of these pieces are outdated as they were made for my AP Art portfolio. Therefore, I am "
-        + "only choosing to showcase my best work. Hopefully, over the summer I will have more time to do traditional "
-        + "art and add to this page."
+        `This page is to showcase my favorite traditional art pieces. While I mainly work in traditional art, 
+        a lot of these pieces are outdated as they were made for my AP Art portfolio. Therefore, I am 
+        only choosing to showcase my best work. Hopefully, over the summer I will have more time to do traditional 
+        art and add to this page.`
     ]
 }
 else if(clickedId == "misc"){
     page_heading = [
         "Miscellaneous Art",
-        "This page features all the miscellaneous designs that do not fit in the previous three categories. "
-        + "As a result of their general randomness, most of these designs can be found on my redbubble. Please "
-        + "make sure to check it out if you like any of these designs! Most of these designs were made in either "
-        + "Procreate or Adobe Illustrator."
+        `This page features all the miscellaneous designs that do not fit in the previous three categories. 
+        As a result of their general randomness, most of these designs can be found on my redbubble. Please 
+        make sure to check it out if you like any of these designs! Most of these designs were made in either 
+        Procreate or Adobe Illustrator.`
     ]
     img_ids_desc = [
         [
             "misc", 
-            "This is my first design I made with Adobe Illustrator. It was made by creating a blend and then "
-            + "applying filters and effects until I was satisfied with the composition. After creating the intial "
-            + "swirl, I applied a slight grain to the whole piece to make it look dated. A lot of my subsequent pieces"
-            + "use a similar effect."
+            `This is my first design I made with Adobe Illustrator. It was made by creating a blend and then 
+            applying filters and effects until I was satisfied with the composition. After creating the intial 
+            swirl, I applied a slight grain to the whole piece to make it look dated. A lot of my subsequent pieces 
+            use a similar effect.`
         ],
         [
             "passionFruit",
-            "This design was made as a represention of how the song Passionfruit by Drake sounds to me (don't judge). "
-            + "This piece is meant to be worn as a shirt design and while the design was made with procreate, the "
-            + "text was done with illustrator."
+            `This design was made as a represention of how the song Passionfruit by Drake sounds to me. 
+            This piece is meant to be worn as a shirt design and while the design was made with procreate, the 
+            text was done with illustrator.`
         ]
     ]
 }
