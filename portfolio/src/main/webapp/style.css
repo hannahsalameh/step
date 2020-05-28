@@ -128,8 +128,11 @@ button:active{
     background-image:url(/images/eas2012.png);
 }
 #traditional{
-    background-image:url(/images/Passionfruit.png);
+    background-image:url();
     /*replace once photograph art*/
+}
+#passionFruit{
+    background-image:url(/images/Passionfruit.png);
 }
 #misc{
     background-image:url(/images/personalShirt.png);

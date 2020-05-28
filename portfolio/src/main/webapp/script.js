@@ -80,7 +80,7 @@ else if(clickedId == "eas"){
         + "I have taken over the position of apparel chair, and therefore have a lot of new designs. "
         + "Since we are only allowed to wear our colors (white, purple, and lavender), creating new"
         + "designs is a challenge. This challenge forces me to make more creative, inventive designs."
-        + "Epsilon Alpha Sigma is the first and only Arab sorority in the nation and has chapter at "
+        + "Epsilon Alpha Sigma is the first and only Arab sorority in the nation and has chapters at "
         + "UMich, UCLA, UNLV, UC Riverside, and UC Davis."
     ]
     img_ids_desc = [
@@ -118,7 +118,21 @@ else if(clickedId == "misc"){
         + "make sure to check it out if you like any of these designs! Most of these designs were made in either "
         + "Procreate or Adobe Illustrator."
     ]
-
+    img_ids_desc = [
+        [
+            "misc", 
+            "This is my first design I made with Adobe Illustrator. It was made by creating a blend and then "
+            + "applying filters and effects until I was satisfied with the composition. After creating the intial "
+            + "swirl, I applied a slight grain to the whole piece to make it look dated. A lot of my subsequent pieces"
+            + "use a similar effect."
+        ],
+        [
+            "passionFruit",
+            "This design was made as a represention of how the song Passionfruit by Drake sounds to me (don't judge). "
+            + "This piece is meant to be worn as a shirt design and while the design was made with procreate, the "
+            + "text was done with illustrator."
+        ]
+    ]
 }
 
 const title = document.createElement("h1");
