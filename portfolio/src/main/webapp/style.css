@@ -1,15 +1,24 @@
 /* ----ALL PAGES---- */
 html{
     background-color:#f7f7f7;
+<<<<<<< HEAD
     color:#3F3F44;
+=======
+    color:#3f3f44;
+>>>>>>> master
     font-family: 'Noto Sans JP', sans-serif;
 }
 a{
     text-decoration:none;
 }
 button{
+<<<<<<< HEAD
     background-color:#CCEABB;
     color:#3F3F44;
+=======
+    background-color:#cceabb;
+    color:#3f3f44;
+>>>>>>> master
     box-shadow: 5px 5px 2px grey;
     border:none;
     font-family: 'Noto Sans JP', sans-serif;
@@ -21,7 +30,11 @@ button:active{
 }
 /* --HEADER INFO-- */
 .header_link{
+<<<<<<< HEAD
     color:#3F3F44;
+=======
+    color:#3f3f44;
+>>>>>>> master
 }
 .header_container{
     display:flex;
@@ -46,7 +59,11 @@ button:active{
     background-image:url("/images/Background.gif");
     background-position: center;
     text-align: center;
+<<<<<<< HEAD
     color:#F7F7F7;
+=======
+    color:#f7f7f7;
+>>>>>>> master
     height: 90vh;
     width: 98vw;
     align-content:center;
@@ -111,7 +128,10 @@ button:active{
 #design_homepage{
     display:flex;
     flex-direction:row;
+<<<<<<< HEAD
     flex-wrap:wrap;
+=======
+>>>>>>> master
 }
 #fake_band{
     background-image:url(/images/record.png);
@@ -125,6 +145,7 @@ button:active{
 #eas{
     background-image:url(/images/easSweatshirt.png);
 }
+<<<<<<< HEAD
 #eas2012{
     background-image:url(/images/eas2012.png);
 }
@@ -135,6 +156,12 @@ button:active{
 #passionFruit{
     background-image:url(/images/Passionfruit.png);
 }
+=======
+#traditional{
+    background-image:url(Passionfruit.png);
+    /*replace once photograph art*/
+}
+>>>>>>> master
 #misc{
     background-image:url(/images/personalShirt.png);
 }
@@ -173,7 +200,10 @@ button:active{
     padding-top:2%;
     display:flex;
     flex-direction:row;
+<<<<<<< HEAD
     flex-wrap: wrap;
+=======
+>>>>>>> master
 }
 .expanded_img{
     background-size:60vh auto;
@@ -185,7 +215,10 @@ button:active{
 }
 .description{
     max-width:30vw;
+<<<<<<< HEAD
     min-width:20vw;
+=======
+>>>>>>> master
     padding-left:3%;
 }
 .main_desc{
@@ -193,4 +226,8 @@ button:active{
     margin-top:3%;
     max-width: 70vh;
     text-align:center;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master
