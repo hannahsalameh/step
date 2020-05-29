@@ -111,6 +111,7 @@ button:active{
 #design_homepage{
     display:flex;
     flex-direction:row;
+    flex-wrap:wrap;
 }
 #fake_band{
     background-image:url(/images/record.png);
@@ -124,9 +125,15 @@ button:active{
 #eas{
     background-image:url(/images/easSweatshirt.png);
 }
+#eas2012{
+    background-image:url(/images/eas2012.png);
+}
 #traditional{
-    background-image:url(Passionfruit.png);
+    background-image:url();
     /*replace once photograph art*/
+}
+#passionFruit{
+    background-image:url(/images/Passionfruit.png);
 }
 #misc{
     background-image:url(/images/personalShirt.png);
@@ -166,6 +173,7 @@ button:active{
     padding-top:2%;
     display:flex;
     flex-direction:row;
+    flex-wrap: wrap;
 }
 .expanded_img{
     background-size:60vh auto;
@@ -177,6 +185,7 @@ button:active{
 }
 .description{
     max-width:30vw;
+    min-width:20vw;
     padding-left:3%;
 }
 .main_desc{
