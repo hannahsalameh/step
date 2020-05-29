@@ -33,7 +33,7 @@ function expandFakeBandDesign(){
                               While we have not created any music yet (hence the fake band), 
                               I have created plenty of promotional material for us. 
                               Hopefully one day the band can become a reality.`;
-  img_ids_desc = [
+  var img_ids_desc = [
             [   "fake_band",
                 `The first image is of a record I designed while playing with shape language.
                 While simple, it utilizes our primary color scheme of red, yellow, and green 
@@ -60,14 +60,14 @@ function expandFakeBandDesign(){
 }
 
 function expandEASDesign(){
-  page_heading = "Epsilon Alpha Sigma";
-  page_heading_desc = `Epsilon Alpha Sigma is the sorority I am a part of at the University of Michigan. This semester 
+  var page_heading = "Epsilon Alpha Sigma";
+  var page_heading_desc = `Epsilon Alpha Sigma is the sorority I am a part of at the University of Michigan. This semester 
                             I have taken over the position of apparel chair, and therefore have a lot of new designs. 
                             Since we are only allowed to wear our colors (white, purple, and lavender), creating new 
                             designs is a challenge. This challenge forces me to make more creative, inventive designs. 
                             Epsilon Alpha Sigma is the first and only Arab sorority in the nation and has chapters at 
                             UMich, UCLA, UNLV, UC Riverside, and UC Davis.`;
-   img_ids_desc = [
+   var img_ids_desc = [
             [
                 "eas",
                 `This design is my current favorite clothing design I've made. The design is inspired by 
@@ -87,12 +87,12 @@ function expandEASDesign(){
 }
 
 function expandTraditionalDesign(){
-  page_heading = "Traditional Art";
-  page_heading_desc = `This page is to showcase my favorite traditional art pieces. While I mainly work in traditional art, 
+  var page_heading = "Traditional Art";
+  var page_heading_desc = `This page is to showcase my favorite traditional art pieces. While I mainly work in traditional art, 
             a lot of these pieces are outdated as they were made for my AP Art portfolio. Therefore, I am 
             only choosing to showcase my best work. Hopefully, over the summer I will have more time to do traditional 
             art and add to this page.`;
-    img_ids_desc = [
+  var img_ids_desc = [
             [
                 "traditional",
                 `This was a piece originally created for my AP Art portfolio. I liked the idea of building up a shape using
@@ -116,12 +116,12 @@ function expandTraditionalDesign(){
     }
 
 function expandMiscDesign(){
-  page_heading = "Miscellaneous Art";
-  page_heading_desc = `This page features all the miscellaneous designs that do not fit in the previous three categories. 
+  var page_heading = "Miscellaneous Art";
+  var page_heading_desc = `This page features all the miscellaneous designs that do not fit in the previous three categories. 
                             As a result of their general randomness, most of these designs can be found on my redbubble. Please 
                             make sure to check it out if you like any of these designs! Most of these designs were made in either 
                             Procreate or Adobe Illustrator.`;
-  img_ids_desc = [
+  var img_ids_desc = [
             [
                 "misc", 
                 `This is my first design I made with Adobe Illustrator. It was made by creating a blend and then 
@@ -151,8 +151,7 @@ function expandDesign(page_heading,page_heading_desc,img_ids_desc){
     designPage.innerHTML = "";
  
     var button = document.createElement("button");
-    var buttonText = document.createTextNode("Back");
-    button.appendChild(buttonText);
+    button.appendChild(document.createTextNode("Back"));
     button.className = "back_btn";
     button.addEventListener('click', function(){ location.reload();}, false);
     designPage.appendChild(button);
