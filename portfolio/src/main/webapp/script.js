@@ -13,9 +13,18 @@
 // limitations under the License.
 
 function getInfo(){
-    fetch('/data').then(response => response.text()).then((data) => {
-        document.getElementById("getInfoContainer").innerHTML = data;
-    });
+    fetch('/data').then(response => response.json()).then((data) => {
+        const infoContainer = document.getElementById("getInfoContainer");
+        infoContainer.innerHTML = "";
+        const heading = document.createElement("h3");
+        heading.appendChild(document.createTextNode("Things Hannah Has to Say:"));
+        infoContainer.appendChild(heading);
+        for(var i = 0; i < data.length; ++i){
+            const p_tag = document.createElement("p");
+            p_tag.appendChild(document.createTextNode(data[i]));
+            infoContainer.appendChild(p_tag);
+        }
+    })
 }
 
 
