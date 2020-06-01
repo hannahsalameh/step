@@ -42,6 +42,7 @@ public class DataServlet extends HttpServlet {
       Entity commentEntity = new Entity("comment");
       commentEntity.setProperty("title",title);
       commentEntity.setProperty("body", body);
+      commentEntity.setProperty("timestamp",timestamp);
 
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
@@ -72,6 +73,12 @@ public class DataServlet extends HttpServlet {
       public String getBody(){
           return body;
       }
+      public long getTimestamp(){
+          return timestamp;
+      }
+      public long getId(){
+          return id;
+      }
   }
 
 @Override
@@ -95,27 +102,6 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
 
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(comments));
+ }
 }
-}
-
-
-// @WebServlet("/data")
-// public class DataServlet extends HttpServlet {
-//   @Override
-//   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//     ArrayList<String> messages = new ArrayList<String>();
-//     messages.add("i am writing this again");
-//     messages.add("because I accidentally deleted it once");
-//     messages.add("whoops");
-//     String json = convertToJson(messages);
-
-//     response.setContentType("application/json;");
-//     response.getWriter().println(json);
-//   }
-//     private String convertToJson(ArrayList<String> messages){
-//       Gson gson = new Gson();
-//       String json = gson.toJson(messages);
-//       return json;
-//   }
-// }
 
