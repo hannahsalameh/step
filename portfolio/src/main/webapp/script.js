@@ -27,6 +27,33 @@ function getInfo(){
     })
 }
 
+function displayComment(){
+    console.log("function is running");
+    fetch('/comments').then(response => response.json()).then(data => {
+        const commentContainer = document.getElementById("comment_container");
+        console.log(data);
+        for(var i = 0; i < data.length; ++i){
+            commentContainer.appendChild(createComment(data[i].title, data[i].body));
+        }
+    })
+}
+
+function createComment(titleText, bodyText){
+    const comment = document.createElement("div");
+    comment.className = "comment";
+
+    const title = document.createElement("h3");
+    title.className = "commentTitle";
+    title.appendChild(document.createTextNode(titleText));
+    comment.appendChild(title);
+
+    const body = document.createElement("p");
+    body.className = "commentBody";
+    body.appendChild(document.createTextNode(bodyText));
+    comment.appendChild(body);
+
+    return comment;
+}
 
 function expandFakeBandDesign(){
   var page_heading = "Parasite";

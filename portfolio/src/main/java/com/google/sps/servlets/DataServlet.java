@@ -14,32 +14,108 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import com.google.gson.Gson;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
+@WebServlet("/comments")
 public class DataServlet extends HttpServlet {
-
+    String json;
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    ArrayList<String> messages = new ArrayList<String>();
-    messages.add("i am writing this again");
-    messages.add("because I accidentally deleted it once");
-    messages.add("whoops");
-    String json = convertToJson(messages);
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      String title = getParameter(request,"title", "");
+      String body = getParameter(request,"comment", "");
+      long timestamp = System.currentTimeMillis();
+
+      Entity commentEntity = new Entity("comment");
+      commentEntity.setProperty("title",title);
+      commentEntity.setProperty("body", body);
+
+      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+      datastore.put(commentEntity);
+      response.sendRedirect("/feedback.html");
+  }
+
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
+   public class Comment{
+      String title;
+      String body;
+      long timestamp;
+      long id;
+      public Comment(String title, String body,long timestamp, long id){
+          this.title = title;
+          this.body = body;
+          this.timestamp = timestamp;
+          this.id = id;
+      }
+      public String getTitle(){
+          return title;
+      }
+      public String getBody(){
+          return body;
+      }
+  }
+
+@Override
+public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Query query = new Query("comment").addSort("timestamp", SortDirection.DESCENDING);
+    
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+
+    ArrayList<Comment> comments = new ArrayList<>();
+    for (Entity entity : results.asIterable()) {
+        String title = (String) entity.getProperty("title");
+        String body = (String) entity.getProperty("body");
+        long timestamp = (long) entity.getProperty("timestamp");
+        long id = entity.getKey().getId();
+
+        Comment comment = new Comment(title, body, timestamp, id);
+        comments.add(comment);
+    }
+    Gson gson = new Gson();
 
     response.setContentType("application/json;");
-    response.getWriter().println(json);
-  }
-  private String convertToJson(ArrayList<String> messages){
-      Gson gson = new Gson();
-      String json = gson.toJson(messages);
-      return json;
-  }
+    response.getWriter().println(gson.toJson(comments));
 }
+}
+
+
+// @WebServlet("/data")
+// public class DataServlet extends HttpServlet {
+//   @Override
+//   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//     ArrayList<String> messages = new ArrayList<String>();
+//     messages.add("i am writing this again");
+//     messages.add("because I accidentally deleted it once");
+//     messages.add("whoops");
+//     String json = convertToJson(messages);
+
+//     response.setContentType("application/json;");
+//     response.getWriter().println(json);
+//   }
+//     private String convertToJson(ArrayList<String> messages){
+//       Gson gson = new Gson();
+//       String json = gson.toJson(messages);
+//       return json;
+//   }
+// }
+
