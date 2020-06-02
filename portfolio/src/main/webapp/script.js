@@ -12,30 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-function getInfo(){
-    fetch('/data').then(response => response.json()).then((data) => {
-        const infoContainer = document.getElementById("getInfoContainer");
-        infoContainer.innerHTML = "";
-        const heading = document.createElement("h3");
-        heading.appendChild(document.createTextNode("Things Hannah Has to Say:"));
-        infoContainer.appendChild(heading);
-        for(var i = 0; i < data.length; ++i){
-            const p_tag = document.createElement("p");
-            p_tag.appendChild(document.createTextNode(data[i]));
-            infoContainer.appendChild(p_tag);
-        }
-    })
-}
-
-function displayComment(){
+function displayComment(limValue){
     console.log("function is running");
-    fetch('/comments').then(response => response.json()).then(data => {
+    fetch('/comments?limit='+ limValue).then(response => response.json()).then(data => {
         const commentContainer = document.getElementById("comment_container");
         console.log(data);
         for(var i = 0; i < data.length; ++i){
             commentContainer.appendChild(createComment(data[i].title, data[i].body));
         }
     })
+}
+
+function limitNumComments(){
+    var limValue = document.getElementById("limit").value;
+    document.getElementById("comment_container").innerHTML = "";
+    displayComment(limValue);
 }
 
 function createComment(titleText, bodyText){

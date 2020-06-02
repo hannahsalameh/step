@@ -20,6 +20,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.FetchOptions;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -88,8 +89,14 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
+    int numQueries = getLimit(request);
+    List<Entity> limitedResults = results.asList(FetchOptions.Builder.withLimit(10));
+    if(numQueries != -1){
+        limitedResults = results.asList(FetchOptions.Builder.withLimit(numQueries));
+    }
+    // results.asIterable()
     ArrayList<Comment> comments = new ArrayList<>();
-    for (Entity entity : results.asIterable()) {
+    for (Entity entity : limitedResults) {
         String title = (String) entity.getProperty("title");
         String body = (String) entity.getProperty("body");
         long timestamp = (long) entity.getProperty("timestamp");
@@ -103,5 +110,22 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(comments));
  }
+
+ private int getLimit(HttpServletRequest request){
+     String limitString = request.getParameter("limit");
+
+     int limit;
+     try{
+      limit = Integer.parseInt(limitString);   
+     } catch(NumberFormatException e) {
+         System.err.println("Could not convert to int: " + limitString);
+         return -1;
+     }
+     if(limit < 0){
+        System.err.println("Player choice is out of range: " + limitString);
+        return -1;
+     }
+     return limit;
+  }
 }
 
