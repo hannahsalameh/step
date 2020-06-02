@@ -89,23 +89,26 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
     PreparedQuery results = datastore.prepare(query);
 
     int numQueries = getLimit(request);
-    List<Entity> limitedResults = results.asList(FetchOptions.Builder.withLimit(10));
-    if(numQueries != -1){
-        limitedResults = results.asList(FetchOptions.Builder.withLimit(numQueries));
+    int defaultLimit = 10; 
+  
+    if(numQueries < 0 || numQueries > 10){
+        numQuries = defaultLimit;
+        System.err.println("Player choice is out of range. Defaulting to 10 comments.");
     }
-    // results.asIterable()
+    List<Entity> limitedResults = results.asList(FetchOptions.Builder.withLimit(numQueries));
+  
     ArrayList<Comment> comments = new ArrayList<>();
     for (Entity entity : limitedResults) {
       Comment comment = entityToComment(entity);
       comments.add(comment);
     }
     Gson gson = new Gson();
-
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(comments));
  }
 
  private int getLimit(HttpServletRequest request){
+     //if an error happens, returns -1 
      String limitString = request.getParameter("limit");
 
      int limit;
@@ -115,12 +118,8 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
          System.err.println("Could not convert to int: " + limitString);
          return -1;
      }
-     if(limit < 0){
-        System.err.println("Player choice is out of range: " + limitString);
-        return -1;
-     }
-     return limit;
   }
+  
   private Comment entityToComment(Entity entity){
     String title = (String) entity.getProperty("title");
     String body = (String) entity.getProperty("body");
