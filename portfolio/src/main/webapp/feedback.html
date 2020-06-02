@@ -15,15 +15,17 @@
         <div class="header_obj"><a href="about.html" class="header_link"><h3> ABOUT </h3></a></div>
         <div class="header_obj"><a href="feedback.html" class="header_link"><h3> FEEDBACK </h3></a></div>
   </header>
-<body>
-    <div id="design_container">
-        <p>Many of Hannah's designs can be bought <a href="https://redbubble.com/people/Unicornflies18/">here</a>!
-        <div id="design_homepage">
-            <div class="design_img" id="fake_band" onclick="expandFakeBandDesign()"><p class="design_text">Pesticide</p></div>
-            <div class="design_img" id="eas" onclick="expandEASDesign()"><p class="design_text">Epsilon Alpha Sigma Merch</p></div>
-            <div class="design_img" id="traditional" onclick="expandTraditionalDesign()"><p class="design_text">Traditional Art</p></div>
-            <div class="design_img" id="misc" onclick="expandMiscDesign()"><p class="design_text">Miscelaneous Designs</p></div>
-        </div>
-    </div>
-</body>
+  <body onload= "displayComment()">
+      <h1> Leave a Comment!</h1>
+      <p> Want Hannah to know what you think of her website? Feel free to leave a comment on this page to make sure she sees it! </p>
+      <form action= "/comments" method="POST">
+      <label for="name"> Name: </label><br>
+      <input type="text" id="name" name="title"></input><br>
+      <label for="comment"> Comment: </label><br>
+      <input type="text" id="comment" name="comment"> </input><br>
+      <input type="submit" value="Submit"> </input>
+      </form>
+      <div id="comment_container">
+      </div>
+  </body>
 </html>
