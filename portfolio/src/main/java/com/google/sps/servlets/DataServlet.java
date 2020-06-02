@@ -32,7 +32,6 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/comments")
 public class DataServlet extends HttpServlet {
-    String json;
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       String title = getParameter(request,"title", "");
