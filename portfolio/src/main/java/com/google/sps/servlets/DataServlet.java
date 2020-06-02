@@ -108,7 +108,14 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
  }
 
  private int getLimit(HttpServletRequest request){
-     //if an error happens, returns -1 
+     /**
+     * Takes in a request from the query line and outputs an int.
+     * Request must be convertable to an int.
+     * <p> If it is not possible for the input to be converted to an
+     * int, the function will always return -1.
+     * @param  request  inputtable information from the query line
+     * @return          returns an positive int, or -1 if it gets invalid input
+     */
      String limitString = request.getParameter("limit");
    
      try{
