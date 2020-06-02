@@ -13,10 +13,8 @@
 // limitations under the License.
 
 function displayComment(limValue){
-    console.log("function is running");
     fetch('/comments?limit='+ limValue).then(response => response.json()).then(data => {
         const commentContainer = document.getElementById("comment_container");
-        console.log(data);
         for(var i = 0; i < data.length; ++i){
             commentContainer.appendChild(createComment(data[i].title, data[i].body));
         }
