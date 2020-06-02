@@ -33,7 +33,6 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/comments")
 public class DataServlet extends HttpServlet {
-    String json;
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       String title = getParameter(request,"title", "");
@@ -97,13 +96,8 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
     // results.asIterable()
     ArrayList<Comment> comments = new ArrayList<>();
     for (Entity entity : limitedResults) {
-        String title = (String) entity.getProperty("title");
-        String body = (String) entity.getProperty("body");
-        long timestamp = (long) entity.getProperty("timestamp");
-        long id = entity.getKey().getId();
-
-        Comment comment = new Comment(title, body, timestamp, id);
-        comments.add(comment);
+      Comment comment = entityToComment(entity);
+      comments.add(comment);
     }
     Gson gson = new Gson();
 
@@ -127,5 +121,12 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
      }
      return limit;
   }
+  private Comment entityToComment(Entity entity){
+    String title = (String) entity.getProperty("title");
+    String body = (String) entity.getProperty("body");
+    long timestamp = (long) entity.getProperty("timestamp");
+    long id = entity.getKey().getId();
+    Comment comment = new Comment(title, body, timestamp, id);
+    return comment;
 }
 
