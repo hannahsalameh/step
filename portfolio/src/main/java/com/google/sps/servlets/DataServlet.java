@@ -89,18 +89,20 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
 
     ArrayList<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
-        String title = (String) entity.getProperty("title");
-        String body = (String) entity.getProperty("body");
-        long timestamp = (long) entity.getProperty("timestamp");
-        long id = entity.getKey().getId();
-
-        Comment comment = new Comment(title, body, timestamp, id);
-        comments.add(comment);
+      Comment comment = entityToComment(entity);
+      comments.add(comment);
     }
     Gson gson = new Gson();
 
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(comments));
  }
+  private Comment entityToComment(Entity entity){
+    String title = (String) entity.getProperty("title");
+    String body = (String) entity.getProperty("body");
+    long timestamp = (long) entity.getProperty("timestamp");
+    long id = entity.getKey().getId();
+    Comment comment = new Comment(title, body, timestamp, id);
+    return comment;
 }
 
