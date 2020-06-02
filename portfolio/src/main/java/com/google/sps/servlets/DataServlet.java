@@ -89,10 +89,10 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
     PreparedQuery results = datastore.prepare(query);
 
     int numQueries = getLimit(request);
-    int defaultLimit = 10; 
+    int maxLimit = 10; 
   
-    if(numQueries < 0 || numQueries > 10){
-        numQuries = defaultLimit;
+    if(numQueries < 0 || numQueries > maxLimit){
+        numQuries = maxLimit;
         System.err.println("Player choice is out of range. Defaulting to 10 comments.");
     }
     List<Entity> limitedResults = results.asList(FetchOptions.Builder.withLimit(numQueries));
@@ -110,10 +110,9 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
  private int getLimit(HttpServletRequest request){
      //if an error happens, returns -1 
      String limitString = request.getParameter("limit");
-
-     int limit;
+   
      try{
-      limit = Integer.parseInt(limitString);   
+      return Integer.parseInt(limitString);   
      } catch(NumberFormatException e) {
          System.err.println("Could not convert to int: " + limitString);
          return -1;
