@@ -28,7 +28,6 @@ function getInfo(){
 }
 
 function displayComment(){
-    console.log("function is running");
     fetch('/comments').then(response => response.json()).then(data => {
         const commentContainer = document.getElementById("comment_container");
         console.log(data);
