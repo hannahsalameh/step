@@ -92,7 +92,7 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
     int maxLimit = 10; 
   
     if(numQueries < 0 || numQueries > maxLimit){
-        numQuries = maxLimit;
+        numQueries = maxLimit;
         System.err.println("Player choice is out of range. Defaulting to 10 comments.");
     }
     List<Entity> limitedResults = results.asList(FetchOptions.Builder.withLimit(numQueries));
@@ -117,7 +117,6 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
      */
  private int getLimit(HttpServletRequest request){
      String limitString = request.getParameter("limit");
-   
      try{
       return Integer.parseInt(limitString);   
      } catch(NumberFormatException e) {
