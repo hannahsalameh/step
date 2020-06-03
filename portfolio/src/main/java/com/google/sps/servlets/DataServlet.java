@@ -107,8 +107,7 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
     response.getWriter().println(gson.toJson(comments));
  }
 
- private int getLimit(HttpServletRequest request){
-     /**
+/**
      * Takes in a request from the query line and outputs an int.
      * Request must be convertable to an int.
      * <p> If it is not possible for the input to be converted to an
@@ -116,6 +115,7 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
      * @param  request  inputtable information from the query line
      * @return          returns an positive int, or -1 if it gets invalid input
      */
+ private int getLimit(HttpServletRequest request){
      String limitString = request.getParameter("limit");
    
      try{
