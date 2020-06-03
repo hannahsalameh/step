@@ -20,6 +20,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.FetchOptions;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -87,16 +88,44 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
+    int numQueries = getLimit(request);
+    int maxLimit = 10; 
+  
+    if(numQueries < 0 || numQueries > maxLimit){
+        numQuries = maxLimit;
+        System.err.println("Player choice is out of range. Defaulting to 10 comments.");
+    }
+    List<Entity> limitedResults = results.asList(FetchOptions.Builder.withLimit(numQueries));
+  
     ArrayList<Comment> comments = new ArrayList<>();
-    for (Entity entity : results.asIterable()) {
+    for (Entity entity : limitedResults) {
       Comment comment = entityToComment(entity);
       comments.add(comment);
     }
     Gson gson = new Gson();
-
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(comments));
  }
+
+/**
+     * Takes in a request from the query line and outputs an int.
+     * Request must be convertable to an int.
+     * <p> If it is not possible for the input to be converted to an
+     * int, the function will always return -1.
+     * @param  request  inputtable information from the query line
+     * @return          returns an positive int, or -1 if it gets invalid input
+     */
+ private int getLimit(HttpServletRequest request){
+     String limitString = request.getParameter("limit");
+   
+     try{
+      return Integer.parseInt(limitString);   
+     } catch(NumberFormatException e) {
+         System.err.println("Could not convert to int: " + limitString);
+         return -1;
+     }
+  }
+  
   private Comment entityToComment(Entity entity){
     String title = (String) entity.getProperty("title");
     String body = (String) entity.getProperty("body");
