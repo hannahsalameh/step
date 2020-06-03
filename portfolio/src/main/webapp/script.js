@@ -23,7 +23,6 @@ function displayComment(limValue){
     fetch(fetchString).then(response => response.json()).then(data => {
         for(var i = 0; i < data.length; ++i){
             commentContainer.appendChild(createComment(data[i].title, data[i].body));
-            console.log(data[i].title,data[i].body);
         }
     })
 }
@@ -31,6 +30,35 @@ function displayComment(limValue){
 function limitNumComments(){
     var limValue = document.getElementById("limit").value;
     displayComment(limValue);
+    loadPagination(limValue);
+}
+
+function addComment(){
+    var init = {method: 'POST'}
+    var addCount = new Request('/num-comments',init);
+    var addComment = new Request('/comments');
+    fetch(addComment);
+    fetch(addCount);
+}
+
+function loadPagination(limValue){
+    console.log("inside loadPagnation");
+    fetch('/num-comments').then((totalNum) => {
+        paginationContainer = document.getElementById("pagination-container");
+        const num_pages = Math.ceil(totalNum/limValue);
+        for(var i = 0; i < num_pages; ++i){
+            paginationContainer.appendChild(createButton(i));
+        }
+    })
+}
+
+function createButton(num){
+    console.log("inside createButton");
+    const button = document.createElement("button");
+    button.className = "pag-button";
+    button.id = num;
+    button.value = num;
+    button.appendChild(document.createTextNode(num));
 }
 
 function createComment(titleText, bodyText){

@@ -19,7 +19,7 @@
       <h1> Leave a Comment!</h1>
       <p> Want Hannah to know what you think of her website? Feel free to leave a comment on this page to make sure she sees it! </p>
       <button id="delete" name="delete" onclick="deleteComments()"> Delete all Comments </button>
-      <form action= "/comments" method="POST">
+      <form onsubmit="addComment()" method="POST">
       <label for="name"> Name: </label><br>
       <input type="text" id="name" name="title"></input><br>
       <label for="comment"> Comment: </label><br>
@@ -30,5 +30,6 @@
              <input type="number" id="limit" name="limit" min="0" max="10" onchange="limitNumComments()" value = "10">
       <div id="comment_container">
       </div>
+      <div id="pagination-container"></div>
   </body>
 </html>
