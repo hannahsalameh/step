@@ -89,38 +89,43 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
     PreparedQuery results = datastore.prepare(query);
 
     int numQueries = getLimit(request);
-    List<Entity> limitedResults = results.asList(FetchOptions.Builder.withLimit(10));
-    if(numQueries != -1){
-        limitedResults = results.asList(FetchOptions.Builder.withLimit(numQueries));
+    int maxLimit = 10; 
+  
+    if(numQueries < 0 || numQueries > maxLimit){
+        numQuries = maxLimit;
+        System.err.println("Player choice is out of range. Defaulting to 10 comments.");
     }
-    // results.asIterable()
+    List<Entity> limitedResults = results.asList(FetchOptions.Builder.withLimit(numQueries));
+  
     ArrayList<Comment> comments = new ArrayList<>();
     for (Entity entity : limitedResults) {
       Comment comment = entityToComment(entity);
       comments.add(comment);
     }
     Gson gson = new Gson();
-
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(comments));
  }
 
+/**
+     * Takes in a request from the query line and outputs an int.
+     * Request must be convertable to an int.
+     * <p> If it is not possible for the input to be converted to an
+     * int, the function will always return -1.
+     * @param  request  inputtable information from the query line
+     * @return          returns an positive int, or -1 if it gets invalid input
+     */
  private int getLimit(HttpServletRequest request){
      String limitString = request.getParameter("limit");
-
-     int limit;
+   
      try{
-      limit = Integer.parseInt(limitString);   
+      return Integer.parseInt(limitString);   
      } catch(NumberFormatException e) {
          System.err.println("Could not convert to int: " + limitString);
          return -1;
      }
-     if(limit < 0){
-        System.err.println("Player choice is out of range: " + limitString);
-        return -1;
-     }
-     return limit;
   }
+  
   private Comment entityToComment(Entity entity){
     String title = (String) entity.getProperty("title");
     String body = (String) entity.getProperty("body");
