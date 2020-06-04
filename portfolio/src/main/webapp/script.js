@@ -19,9 +19,9 @@ function displayComment(limValue){
         fetchString += limValue;
     }
     fetch(fetchString).then(response => response.json()).then(data => {
+        commentContainer = document.getElementById("comment_container");
+        commentContainer.innerHTML = "";
         for(var i = 0; i < data.length; ++i){
-            commentContainer = document.getElementById("comment_container");
-            commentContainer.innerHTML = "";
             commentContainer.appendChild(createComment(data[i].title, data[i].body));
         }
     })
