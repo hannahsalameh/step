@@ -18,12 +18,11 @@ function displayComment(limValue){
         fetchString += "?limit=";
         fetchString += limValue;
     }
-    commentContainer = document.getElementById("comment_container");
-    commentContainer.innerHTML = "";
     fetch(fetchString).then(response => response.json()).then(data => {
         for(var i = 0; i < data.length; ++i){
+            commentContainer = document.getElementById("comment_container");
+            commentContainer.innerHTML = "";
             commentContainer.appendChild(createComment(data[i].title, data[i].body));
-            console.log(data[i].title,data[i].body);
         }
     })
 }
