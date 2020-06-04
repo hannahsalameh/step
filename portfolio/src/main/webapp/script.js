@@ -53,7 +53,9 @@ function createComment(titleText, bodyText){
 function deleteComments(){
     var init = {method: 'POST'}
     var request = new Request('/delete-data',init);
-    fetch(request).then(displayComment(0));
+    fetch(request).then(() => {
+        displayComment(10);
+    });
 }
 
 function expandFakeBandDesign(){
