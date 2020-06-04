@@ -18,6 +18,7 @@
   <body onload= "displayComment()">
       <h1> Leave a Comment!</h1>
       <p> Want Hannah to know what you think of her website? Feel free to leave a comment on this page to make sure she sees it! </p>
+      <button id="delete" name="delete" onclick="deleteComments()"> Delete all Comments </button>
       <form action= "/comments" method="POST">
       <label for="name"> Name: </label><br>
       <input type="text" id="name" name="title"></input><br>
@@ -26,7 +27,7 @@
       <input type="submit" value="Submit"> </input> <br><br>
       </form>
              <label for="limit"> Number of Comments to Display: (Between 0 and 10) </label>
-             <input type="number" id="limit" name="limit" min="0" max="10" onchange="limitNumComments()">
+             <input type="number" id="limit" name="limit" min="0" max="10" onchange="limitNumComments()" value = "10">
       <div id="comment_container">
       </div>
   </body>

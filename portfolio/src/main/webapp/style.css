@@ -23,6 +23,11 @@ button{
 button:active{
     background-color:#b6cda8;
 }
+hr{
+    border: 1px solid #3f3f44;
+    color: #3f3f44;
+    background-color: #3f3f44;
+}
 /* --HEADER INFO-- */
 .header_link{
     color:#3f3f44;
@@ -45,7 +50,9 @@ button:active{
 #logo:hover{
     opacity:.7;
 }
+
 /* ----MAIN PAGE----*/
+
 #main_background{
     background-image:url("/images/Background.gif");
     background-position: center;
@@ -205,4 +212,37 @@ button:active{
     margin-top:3%;
     max-width: 70vh;
     text-align:center;
+}
+
+/* ----FEEDBACK PAGE----*/
+#comment_container{
+    background-color: #fdcb9e;
+    border-left: 1px solid #3f3f44;
+    border-right:1px solid #3f3f44;
+    max-width: 80vw;
+    margin:auto;
+    margin-top:30px;
+    margin-bottom:30px;
+}
+.comment{
+    border-top: 1px solid #3f3f44;
+    border-bottom: 1px solid #3f3f44;
+    padding-bottom:10px;
+    max-width: 80vw;
+    margin:auto;
+}
+.commentTitle{
+    margin-bottom: 0;
+    margin-left:10px;
+    padding-top: 10px;
+    padding-bottom:0;
+    font-size: 16;
+    text-decoration: none;
+}
+.commentBody{
+    margin-left:10px;
+}
+#delete{
+    margin-bottom: 20px;
+    margin-top:20px;
 }

@@ -13,8 +13,14 @@
 // limitations under the License.
 
 function displayComment(limValue){
-    fetch('/comments?limit='+ limValue).then(response => response.json()).then(data => {
-        const commentContainer = document.getElementById("comment_container");
+    var fetchString = '/comments';
+    if(limValue){
+        fetchString += "?limit=";
+        fetchString += limValue;
+    }
+    fetch(fetchString).then(response => response.json()).then(data => {
+        commentContainer = document.getElementById("comment_container");
+        commentContainer.innerHTML = "";
         for(var i = 0; i < data.length; ++i){
             commentContainer.appendChild(createComment(data[i].title, data[i].body));
         }
@@ -23,7 +29,6 @@ function displayComment(limValue){
 
 function limitNumComments(){
     var limValue = document.getElementById("limit").value;
-    document.getElementById("comment_container").innerHTML = "";
     displayComment(limValue);
 }
 
@@ -42,6 +47,14 @@ function createComment(titleText, bodyText){
     comment.appendChild(body);
 
     return comment;
+}
+
+function deleteComments(){
+    var init = {method: 'POST'}
+    var request = new Request('/delete-data',init);
+    fetch(request).then(() => {
+        displayComment(10);
+    });
 }
 
 function expandFakeBandDesign(){
