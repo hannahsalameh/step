@@ -31,16 +31,12 @@ public class DeleteServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
      Query query = new Query("comment").addSort("timestamp", SortDirection.DESCENDING);
      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-     PreparedQuery results = datastore.prepare(query);
+     PreparedQuery commentList = datastore.prepare(query);
 
      ArrayList<Key> keys = new ArrayList<Key>();
 
-     for (Entity entity : results.asIterable()) {
-         Key key = entity.getKey();
-         keys.add(key);
-     }
-     for(Key key: keys){
-         datastore.delete(key);
+     for (Entity entity : commentList.asIterable()) {
+         datastore.delete(entity.getKey());
      }
 }
 }
