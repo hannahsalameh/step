@@ -12,24 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-function displayPage(){
-  fetch('/loginStatus').then(response => response.json()).then(data =>{
-    if(data.loginStatus == false){
-      const body = document.getElementById("content");
-      body.innerHTML = "";
-
-      const error = document.createElement("h1");
-      error.appendChild(document.createTextNode("Error: Not logged in!"));
-      body.appendChild(error);
-
-      const loginLink = document.createElement("a");
-      loginLink.href = data.url;
-      loginLink.appendChild(document.createTextNode("Click here to log in."));
-      body.appendChild(loginLink);
-    }
-  })
-}
-
 function displayComment(limValue){
     var fetchString = '/comments';
     if(limValue){
