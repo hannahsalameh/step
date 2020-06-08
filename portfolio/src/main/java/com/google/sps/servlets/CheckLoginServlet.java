@@ -31,26 +31,30 @@ public class CheckLoginServlet extends HttpServlet {
           UserService userService = UserServiceFactory.getUserService();
           boolean isloggedin = false;
           String url = "/";
+          String email = "null";
           if(userService.isUserLoggedIn()){
             isloggedin = true;
             String urlToRedirectToAfterUserLogsOut = "/";
             url = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
+            email = userService.getCurrentUser().getEmail();
           }
           else{
             String urlToRedirectToAfterUserLogsIn = "/";
             url = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
           }
-          LoginInfo login = new LoginInfo(isloggedin, url);
+          LoginInfo login = new LoginInfo(isloggedin, url, email);
           Gson gson = new Gson();
           response.setContentType("application/json;");
           response.getWriter().println(gson.toJson(login));
   }
   private class LoginInfo{
     boolean loginStatus;
-    String url;
-    LoginInfo(boolean loginStatus, String url){
+      String url;
+      String email;
+    LoginInfo(boolean loginStatus, String url,String email){
       this.loginStatus = loginStatus;
       this.url = url;
+      this.email = email;
     }
     public boolean getLoginStatus(){
       return loginStatus;
