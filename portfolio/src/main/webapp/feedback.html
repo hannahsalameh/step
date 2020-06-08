@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <script defer src="loginCheck.js"></script>
   </head>
   <header class="header_container">
         <div class="header_obj"><a href="index.html"> <img src="/images/favicon.png" id="logo"></a></div>
@@ -16,6 +17,7 @@
         <div class="header_obj"><a href="feedback.html" class="header_link"><h3> FEEDBACK </h3></a></div>
   </header>
   <body onload= "displayComment()">
+    <div id="content">
       <h1> Leave a Comment!</h1>
       <p> Want Hannah to know what you think of her website? Feel free to leave a comment on this page to make sure she sees it! </p>
       <button id="delete" name="delete" onclick="deleteComments()"> Delete all Comments </button>
@@ -30,5 +32,6 @@
              <input type="number" id="limit" name="limit" min="0" max="10" onchange="limitNumComments()" value = "10">
       <div id="comment_container">
       </div>
+    </div>
   </body>
 </html>

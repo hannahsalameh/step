@@ -1,4 +1,6 @@
-function displayPage(){
+document.addEventListener("DOMContentLoaded", displayPage, false);
+
+function displayPage(e){
   fetch('/loginStatus').then(response => response.json()).then(data =>{
     if(data.loginStatus == false){
       const body = document.getElementById("content");
