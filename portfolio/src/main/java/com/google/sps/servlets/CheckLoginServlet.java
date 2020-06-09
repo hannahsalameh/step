@@ -48,16 +48,16 @@ public class CheckLoginServlet extends HttpServlet {
           response.getWriter().println(gson.toJson(login));
   }
   private class LoginInfo{
-    boolean loginStatus;
+    boolean isLoggedIn;
       String url;
       String email;
-    LoginInfo(boolean loginStatus, String url,String email){
-      this.loginStatus = loginStatus;
+    LoginInfo(boolean isLoggedIn, String url,String email){
+      this.isLoggedIn = isLoggedIn;
       this.url = url;
       this.email = email;
     }
-    public boolean getLoginStatus(){
-      return loginStatus;
+    public boolean GetIsLoggedIn(){
+      return isLoggedIn;
     }
     public String getUrl(){
       return url;
