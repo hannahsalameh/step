@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", displayPage, false);
 
 function displayPage(e){
   fetch('/loginStatus').then(response => response.json()).then(data =>{
-    if(data.loginStatus == false){
+    if(!data.loginStatus){
       const body = document.getElementById("content");
       body.innerHTML = "";
 
