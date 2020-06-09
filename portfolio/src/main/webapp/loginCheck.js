@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", displayPage, false);
 
 function displayPage(e){
-  fetch('/loginStatus').then(response => response.json()).then(data =>{
+  fetch('/loginStatus').then(response => response.json()).then(data => {
     if(!data.loginStatus){
       const body = document.getElementById("content");
       body.innerHTML = "";
@@ -17,9 +17,9 @@ function displayPage(e){
     }
     else{
       const logoutLink = document.getElementById("logout");
-      const logoutLinkText =document.getElementById("logoutText");
+      const logoutTextholder = document.getElementById("logoutText");
       logoutLink.href = data.url;
-      logoutLinkText.innerHTML = "Click here to log out, " + data.email;
+      logoutTextholder.innerHTML = "Click here to log out from " + data.email;
     }
   })
 }
