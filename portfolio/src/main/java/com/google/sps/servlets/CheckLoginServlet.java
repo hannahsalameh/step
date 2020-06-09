@@ -29,20 +29,28 @@ public class CheckLoginServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
           UserService userService = UserServiceFactory.getUserService();
-          boolean isloggedin = false;
           String url = "/";
+<<<<<<< HEAD
           String email = "null";
           if(userService.isUserLoggedIn()){
             isloggedin = true;
             String urlToRedirectToAfterUserLogsOut = "/";
             url = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
             email = userService.getCurrentUser().getEmail();
+=======
+          if(userService.isUserLoggedIn()){ 
+            url = userService.createLogoutURL("/");
+>>>>>>> 8ab7aecf37f725408f414d67b67c7c6a43b88491
           }
           else{
-            String urlToRedirectToAfterUserLogsIn = "/";
-            url = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
+            url = userService.createLoginURL("/");
           }
+<<<<<<< HEAD
           LoginInfo login = new LoginInfo(isloggedin, url, email);
+=======
+          LoginInfo login = new LoginInfo(userService.isUserLoggedIn(), url);
+    
+>>>>>>> 8ab7aecf37f725408f414d67b67c7c6a43b88491
           Gson gson = new Gson();
           response.setContentType("application/json;");
           response.getWriter().println(gson.toJson(login));
