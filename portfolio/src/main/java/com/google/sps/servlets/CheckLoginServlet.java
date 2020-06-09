@@ -31,7 +31,7 @@ public class CheckLoginServlet extends HttpServlet {
           UserService userService = UserServiceFactory.getUserService();
           boolean isloggedin = false;
           String url = "/";
-          String email = "null";
+          String email = "";
           if(userService.isUserLoggedIn()){
             isloggedin = true;
             String urlToRedirectToAfterUserLogsOut = "/";
