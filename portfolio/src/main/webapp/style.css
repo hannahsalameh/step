@@ -245,6 +245,12 @@ hr{
 .commentBody{
     margin-left:10px;
 }
+.userEmail{
+  margin-left:10px;
+  margin-top:0;
+  padding-top:0;
+  font-size:12px;
+}
 #delete{
     margin-bottom: 20px;
     margin-top:20px;
