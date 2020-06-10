@@ -14,10 +14,14 @@
 
 function loggedInCheck(){
   fetch('/loginStatus').then(response => response.json()).then(data =>{
+    const commentDesc = document.getElementById("commentDesc");
     if(data.loginStatus){
       document.getElementById("delete").style.display = "inline";
       document.getElementById("comment_form").style.display = "inline";
-      const commentDesc = document.getElementById("commentDesc");
+      commentDesc.innerHTML = `Want Hannah to know what you think of her website?
+                               Feel free to leave a comment on this page to make
+                               sure she sees it! Click `
+
     } else{
 
     }
