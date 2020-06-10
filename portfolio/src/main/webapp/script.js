@@ -18,7 +18,7 @@ function loggedInCheck(){
     const link = document.createElement("a");
     link.href = data.url;
     link.innerHTML = "here";
-    if(data.loginStatus){
+    if(data.isLoggedIn){
       document.getElementById("delete").style.display = "block";
       document.getElementById("comment_form").style.display = "inline";
       commentDesc.innerHTML = `Want Hannah to know what you think of her website?
@@ -27,7 +27,7 @@ function loggedInCheck(){
 
       commentDesc.appendChild(link);
       commentDesc.insertAdjacentHTML('beforeend', " to log out. ");
-    } else{
+    } else {
       commentDesc.innerHTML = "Wanna post a comment? Click ";
       commentDesc.appendChild(link);
       commentDesc.insertAdjacentHTML('beforeend', " to log in. ");
@@ -45,7 +45,7 @@ function displayComment(limValue){
         commentContainer = document.getElementById("comment_container");
         commentContainer.innerHTML = "";
         for(var i = 0; i < data.length; ++i){
-            commentContainer.appendChild(createComment(data[i].title, data[i].body));
+            commentContainer.appendChild(createComment(data[i].title, data[i].body, data[i].email));
         }
     })
 }
@@ -55,7 +55,7 @@ function limitNumComments(){
     displayComment(limValue);
 }
 
-function createComment(titleText, bodyText){
+function createComment(titleText, bodyText, emailText){
     const comment = document.createElement("div");
     comment.className = "comment";
 
@@ -63,6 +63,11 @@ function createComment(titleText, bodyText){
     title.className = "commentTitle";
     title.appendChild(document.createTextNode(titleText));
     comment.appendChild(title);
+
+    const email = document.createElement("p");
+    email.className = "userEmail";
+    email.appendChild(document.createTextNode(emailText));
+    comment.appendChild(email);
 
     const body = document.createElement("p");
     body.className = "commentBody";

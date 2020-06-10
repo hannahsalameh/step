@@ -41,11 +41,13 @@ public class DataServlet extends HttpServlet {
     if(userService.isUserLoggedIn()){
       String title = getParameter(request,"title", "");
       String body = getParameter(request,"comment", "");
+      String email = userService.getCurrentUser().getEmail();
       long timestamp = System.currentTimeMillis();
 
       Entity commentEntity = new Entity("comment");
       commentEntity.setProperty("title",title);
       commentEntity.setProperty("body", body);
+      commentEntity.setProperty("email", email);
       commentEntity.setProperty("timestamp",timestamp);
 
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -64,11 +66,13 @@ public class DataServlet extends HttpServlet {
    public class Comment{
       String title;
       String body;
+      String email;
       long timestamp;
       long id;
-      public Comment(String title, String body,long timestamp, long id){
+      public Comment(String title, String body,String email, long timestamp, long id){
           this.title = title;
           this.body = body;
+          this.email = email;
           this.timestamp = timestamp;
           this.id = id;
       }
@@ -77,6 +81,9 @@ public class DataServlet extends HttpServlet {
       }
       public String getBody(){
           return body;
+      }
+      public String getEmail(){
+        return email;
       }
       public long getTimestamp(){
           return timestamp;
@@ -134,9 +141,10 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
   private Comment entityToComment(Entity entity){
     String title = (String) entity.getProperty("title");
     String body = (String) entity.getProperty("body");
+    String email = (String) entity.getProperty("email");
     long timestamp = (long) entity.getProperty("timestamp");
     long id = entity.getKey().getId();
-    Comment comment = new Comment(title, body, timestamp, id);
+    Comment comment = new Comment(title, body, email, timestamp, id);
     return comment;
 }
 }

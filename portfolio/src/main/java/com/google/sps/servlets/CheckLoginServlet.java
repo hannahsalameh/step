@@ -30,15 +30,13 @@ public class CheckLoginServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
           UserService userService = UserServiceFactory.getUserService();
           String url = "/";
-          String email = "";
           if(userService.isUserLoggedIn()){
             url = userService.createLogoutURL("/");
-            email = userService.getCurrentUser().getEmail();
           }
           else{
             url = userService.createLoginURL("/");
           }
-          LoginInfo login = new LoginInfo(userService.isUserLoggedIn(), url, email);
+          LoginInfo login = new LoginInfo(userService.isUserLoggedIn(), url);
 
           Gson gson = new Gson();
           response.setContentType("application/json;");
@@ -47,11 +45,9 @@ public class CheckLoginServlet extends HttpServlet {
   private class LoginInfo{
     boolean isLoggedIn;
       String url;
-      String email;
-    LoginInfo(boolean isLoggedIn, String url,String email){
+    LoginInfo(boolean isLoggedIn, String url){
       this.isLoggedIn = isLoggedIn;
       this.url = url;
-      this.email = email;
     }
     public boolean GetIsLoggedIn(){
       return isLoggedIn;
