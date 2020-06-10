@@ -12,6 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+function loggedInCheck(){
+  fetch('/loginStatus').then(response => response.json()).then(data =>{
+    if(data.loginStatus){
+      document.getElementById("delete").style.display = "inline";
+      document.getElementById("comment_form").style.display = "inline";
+      const commentDesc = document.getElementById("commentDesc");
+    } else{
+
+    }
+  })
+}
+
 function displayComment(limValue){
     var fetchString = '/comments';
     if(limValue){

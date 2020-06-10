@@ -29,12 +29,16 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/comments")
 public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    UserService userService = UserServiceFactory.getUserService();
+    if(userService.isUserLoggedIn()){
       String title = getParameter(request,"title", "");
       String body = getParameter(request,"comment", "");
       long timestamp = System.currentTimeMillis();
@@ -47,6 +51,7 @@ public class DataServlet extends HttpServlet {
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
       response.sendRedirect("/feedback.html");
+    }
   }
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
@@ -83,20 +88,22 @@ public class DataServlet extends HttpServlet {
 
 @Override
 public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  UserService userService = UserServiceFactory.getUserService();
+  if(userService.isUserLoggedIn()){
     Query query = new Query("comment").addSort("timestamp", SortDirection.DESCENDING);
-    
+
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
     int numQueries = getLimit(request);
-    int maxLimit = 10; 
-  
+    int maxLimit = 10;
+
     if(numQueries < 0 || numQueries > maxLimit){
         numQueries = maxLimit;
         System.err.println("Player choice is out of range. Defaulting to 10 comments.");
     }
     List<Entity> limitedResults = results.asList(FetchOptions.Builder.withLimit(numQueries));
-  
+
     ArrayList<Comment> comments = new ArrayList<>();
     for (Entity entity : limitedResults) {
       Comment comment = entityToComment(entity);
@@ -105,6 +112,14 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
     Gson gson = new Gson();
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(comments));
+  } else{
+    String loginUrl = userService.createLoginURL("/");
+
+    response.setContentType("text/html");
+    PrintWriter out = response.getWriter();
+    out.println("<h1> Error: Cannot display comments unless logged in. </h1>");
+    out.println("<p> Log in <a href = \" " + loginUrl " \"> here </a></p>");
+  }
  }
 
 /**
@@ -118,13 +133,13 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
  private int getLimit(HttpServletRequest request){
      String limitString = request.getParameter("limit");
      try{
-      return Integer.parseInt(limitString);   
+      return Integer.parseInt(limitString);
      } catch(NumberFormatException e) {
          System.err.println("Could not convert to int: " + limitString);
          return -1;
      }
   }
-  
+
   private Comment entityToComment(Entity entity){
     String title = (String) entity.getProperty("title");
     String body = (String) entity.getProperty("body");
