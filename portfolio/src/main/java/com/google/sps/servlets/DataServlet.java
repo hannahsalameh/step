@@ -29,24 +29,31 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/comments")
 public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    UserService userService = UserServiceFactory.getUserService();
+    if(userService.isUserLoggedIn()){
       String title = getParameter(request,"title", "");
       String body = getParameter(request,"comment", "");
+      String email = userService.getCurrentUser().getEmail();
       long timestamp = System.currentTimeMillis();
 
       Entity commentEntity = new Entity("comment");
       commentEntity.setProperty("title",title);
       commentEntity.setProperty("body", body);
+      commentEntity.setProperty("email", email);
       commentEntity.setProperty("timestamp",timestamp);
 
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
       response.sendRedirect("/feedback.html");
+    }
   }
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
@@ -59,11 +66,13 @@ public class DataServlet extends HttpServlet {
    public class Comment{
       String title;
       String body;
+      String email;
       long timestamp;
       long id;
-      public Comment(String title, String body,long timestamp, long id){
+      public Comment(String title, String body,String email, long timestamp, long id){
           this.title = title;
           this.body = body;
+          this.email = email;
           this.timestamp = timestamp;
           this.id = id;
       }
@@ -72,6 +81,9 @@ public class DataServlet extends HttpServlet {
       }
       public String getBody(){
           return body;
+      }
+      public String getEmail(){
+        return email;
       }
       public long getTimestamp(){
           return timestamp;
@@ -83,20 +95,21 @@ public class DataServlet extends HttpServlet {
 
 @Override
 public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  UserService userService = UserServiceFactory.getUserService();
     Query query = new Query("comment").addSort("timestamp", SortDirection.DESCENDING);
-    
+
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
     int numQueries = getLimit(request);
-    int maxLimit = 10; 
-  
+    int maxLimit = 10;
+
     if(numQueries < 0 || numQueries > maxLimit){
         numQueries = maxLimit;
         System.err.println("Player choice is out of range. Defaulting to 10 comments.");
     }
     List<Entity> limitedResults = results.asList(FetchOptions.Builder.withLimit(numQueries));
-  
+
     ArrayList<Comment> comments = new ArrayList<>();
     for (Entity entity : limitedResults) {
       Comment comment = entityToComment(entity);
@@ -105,7 +118,7 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
     Gson gson = new Gson();
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(comments));
- }
+}
 
 /**
      * Takes in a request from the query line and outputs an int.
@@ -118,19 +131,20 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
  private int getLimit(HttpServletRequest request){
      String limitString = request.getParameter("limit");
      try{
-      return Integer.parseInt(limitString);   
+      return Integer.parseInt(limitString);
      } catch(NumberFormatException e) {
          System.err.println("Could not convert to int: " + limitString);
          return -1;
      }
   }
-  
+
   private Comment entityToComment(Entity entity){
     String title = (String) entity.getProperty("title");
     String body = (String) entity.getProperty("body");
+    String email = (String) entity.getProperty("email");
     long timestamp = (long) entity.getProperty("timestamp");
     long id = entity.getKey().getId();
-    Comment comment = new Comment(title, body, timestamp, id);
+    Comment comment = new Comment(title, body, email, timestamp, id);
     return comment;
 }
 }

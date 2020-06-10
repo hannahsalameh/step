@@ -30,27 +30,27 @@ public class CheckLoginServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
           UserService userService = UserServiceFactory.getUserService();
           String url = "/";
-          if(userService.isUserLoggedIn()){ 
+          if(userService.isUserLoggedIn()){
             url = userService.createLogoutURL("/");
           }
           else{
             url = userService.createLoginURL("/");
           }
           LoginInfo login = new LoginInfo(userService.isUserLoggedIn(), url);
-    
+
           Gson gson = new Gson();
           response.setContentType("application/json;");
           response.getWriter().println(gson.toJson(login));
   }
   private class LoginInfo{
-    boolean loginStatus;
-    String url;
-    LoginInfo(boolean loginStatus, String url){
-      this.loginStatus = loginStatus;
+    boolean isLoggedIn;
+      String url;
+    LoginInfo(boolean isLoggedIn, String url){
+      this.isLoggedIn = isLoggedIn;
       this.url = url;
     }
-    public boolean getLoginStatus(){
-      return loginStatus;
+    public boolean GetIsLoggedIn(){
+      return isLoggedIn;
     }
     public String getUrl(){
       return url;

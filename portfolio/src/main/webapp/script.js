@@ -12,20 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-function displayPage(){
-  fetch('/loginStatus').then(response => response.json()).then(data =>{
-    if(data.loginStatus == false){
-      const body = document.getElementById("content");
-      body.innerHTML = "";
+function loggedInCheck(){
+  fetch('/loginStatus').then(response => response.json()).then(data => {
+    var commentDesc = document.getElementById("commentDesc");
+    const link = document.createElement("a");
+    link.href = data.url;
+    link.innerHTML = "here";
+    if(data.isLoggedIn){
+      document.getElementById("delete").style.display = "block";
+      document.getElementById("comment_form").style.display = "inline";
+      commentDesc.innerHTML = `Want Hannah to know what you think of her website?
+                               Feel free to leave a comment on this page to make
+                               sure she sees it! Click `;
 
-      const error = document.createElement("h1");
-      error.appendChild(document.createTextNode("Error: Not logged in!"));
-      body.appendChild(error);
-
-      const loginLink = document.createElement("a");
-      loginLink.href = data.url;
-      loginLink.appendChild(document.createTextNode("Click here to log in."));
-      body.appendChild(loginLink);
+      commentDesc.appendChild(link);
+      commentDesc.insertAdjacentHTML('beforeend', " to log out. ");
+    } else {
+      commentDesc.innerHTML = "Wanna post a comment? Click ";
+      commentDesc.appendChild(link);
+      commentDesc.insertAdjacentHTML('beforeend', " to log in. ");
     }
   })
 }
@@ -40,7 +45,7 @@ function displayComment(limValue){
         commentContainer = document.getElementById("comment_container");
         commentContainer.innerHTML = "";
         for(var i = 0; i < data.length; ++i){
-            commentContainer.appendChild(createComment(data[i].title, data[i].body));
+            commentContainer.appendChild(createComment(data[i].title, data[i].body, data[i].email));
         }
     })
 }
@@ -50,7 +55,7 @@ function limitNumComments(){
     displayComment(limValue);
 }
 
-function createComment(titleText, bodyText){
+function createComment(titleText, bodyText, emailText){
     const comment = document.createElement("div");
     comment.className = "comment";
 
@@ -58,6 +63,11 @@ function createComment(titleText, bodyText){
     title.className = "commentTitle";
     title.appendChild(document.createTextNode(titleText));
     comment.appendChild(title);
+
+    const email = document.createElement("p");
+    email.className = "userEmail";
+    email.appendChild(document.createTextNode(emailText));
+    comment.appendChild(email);
 
     const body = document.createElement("p");
     body.className = "commentBody";

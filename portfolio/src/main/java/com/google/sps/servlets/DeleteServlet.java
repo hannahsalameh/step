@@ -24,11 +24,15 @@ import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 @WebServlet("/delete-data")
 public class DeleteServlet extends HttpServlet {
     @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    UserService userService = UserServiceFactory.getUserService();
+    if(userService.isUserLoggedIn()){
      Query query = new Query("comment").addSort("timestamp", SortDirection.DESCENDING);
      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
      PreparedQuery commentList = datastore.prepare(query);
@@ -38,5 +42,6 @@ public class DeleteServlet extends HttpServlet {
      for (Entity entity : commentList.asIterable()) {
          datastore.delete(entity.getKey());
      }
-}
+   }
+ }
 }
