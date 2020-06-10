@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My Portfolio</title>
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="map.js">
+
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5e8QT_P18Y-kyCblmBkUNwEOaOiFW8-M&callback=initMap">
+    </script>
+    <script>
+      (function(exports) {
+        "use strict";
+
+        function initMap() {
+          exports.map = new google.maps.Map(document.getElementById("map"), {
+            center: {
+              lat: -34.397,
+              lng: 150.644
+            },
+            zoom: 8
+          });
+        }
+
+        exports.initMap = initMap;
+      })((this.window = this.window || {}));
+    </script>
+  </head>
+  <header class="header_container">
+        <div class="header_obj"><a href="index.html"> <img src="/images/favicon.png" id="logo"></a></div>
+        <div class="header_obj"><a href="projects.html" class="header_link"><h3> PROJECTS </h3></a></div>
+        <div class="header_obj"><a href="designs.html" class="header_link"><h3> DESIGNS </h3></a></div>
+        <div class="header_obj"><a href="about.html" class="header_link"><h3> ABOUT </h3></a></div>
+        <div class="header_obj"><a href="feedback.html" class="header_link"><h3> FEEDBACK </h3></a></div>
+        <div class="header_obj"><a href="maps.html" class="header_link"><h3> MAP </h3></a></div>
+  </header>
+  <body onload="initMap()">
+    <div id="map"></div>
+  </body>
+</html>

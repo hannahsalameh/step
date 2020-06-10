@@ -256,3 +256,8 @@ hr{
     margin-top:20px;
     display:none;
 }
+
+/* -- MAPS -- */
+#map{
+  height:100%;
+}

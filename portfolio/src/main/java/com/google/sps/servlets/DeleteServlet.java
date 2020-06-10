@@ -33,15 +33,15 @@ public class DeleteServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     UserService userService = UserServiceFactory.getUserService();
     if(userService.isUserLoggedIn()){
-     Query query = new Query("comment").addSort("timestamp", SortDirection.DESCENDING);
-     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-     PreparedQuery commentList = datastore.prepare(query);
+       Query query = new Query("comment").addSort("timestamp", SortDirection.DESCENDING);
+       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+       PreparedQuery commentList = datastore.prepare(query);
 
-     ArrayList<Key> keys = new ArrayList<Key>();
+       ArrayList<Key> keys = new ArrayList<Key>();
 
-     for (Entity entity : commentList.asIterable()) {
-         datastore.delete(entity.getKey());
-     }
+       for (Entity entity : commentList.asIterable()) {
+           datastore.delete(entity.getKey());
+       }
    }
- }
+  }
 }
