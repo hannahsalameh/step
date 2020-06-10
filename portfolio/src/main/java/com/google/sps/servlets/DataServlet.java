@@ -89,7 +89,6 @@ public class DataServlet extends HttpServlet {
 @Override
 public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
   UserService userService = UserServiceFactory.getUserService();
-  if(userService.isUserLoggedIn()){
     Query query = new Query("comment").addSort("timestamp", SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -112,15 +111,7 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
     Gson gson = new Gson();
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(comments));
-  } else{
-    String loginUrl = userService.createLoginURL("/");
-
-    response.setContentType("text/html");
-    PrintWriter out = response.getWriter();
-    out.println("<h1> Error: Cannot display comments unless logged in. </h1>");
-    out.println("<p> Log in <a href = \" " + loginUrl " \"> here </a></p>");
-  }
- }
+}
 
 /**
      * Takes in a request from the query line and outputs an int.

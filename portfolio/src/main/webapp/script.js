@@ -13,17 +13,24 @@
 // limitations under the License.
 
 function loggedInCheck(){
-  fetch('/loginStatus').then(response => response.json()).then(data =>{
-    const commentDesc = document.getElementById("commentDesc");
+  fetch('/loginStatus').then(response => response.json()).then(data => {
+    var commentDesc = document.getElementById("commentDesc");
+    const link = document.createElement("a");
+    link.href = data.url;
+    link.innerHTML = "here";
     if(data.loginStatus){
-      document.getElementById("delete").style.display = "inline";
+      document.getElementById("delete").style.display = "block";
       document.getElementById("comment_form").style.display = "inline";
       commentDesc.innerHTML = `Want Hannah to know what you think of her website?
                                Feel free to leave a comment on this page to make
-                               sure she sees it! Click `
+                               sure she sees it! Click `;
 
+      commentDesc.appendChild(link);
+      commentDesc.insertAdjacentHTML('beforeend', " to log out. ");
     } else{
-
+      commentDesc.innerHTML = "Wanna post a comment? Click ";
+      commentDesc.appendChild(link);
+      commentDesc.insertAdjacentHTML('beforeend', " to log in. ");
     }
   })
 }
