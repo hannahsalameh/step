@@ -44,10 +44,19 @@ public class DataServlet extends HttpServlet {
       String email = userService.getCurrentUser().getEmail();
       long timestamp = System.currentTimeMillis();
 
+      Document doc =
+        Document.newBuilder().setContent(body).setType(Document.Type.PLAIN_TEXT).build();
+      LanguageServiceClient languageService = LanguageServiceClient.create();
+      Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
+      float score = sentiment.getScore();
+      languageService.close();
+
+
       Entity commentEntity = new Entity("comment");
       commentEntity.setProperty("title",title);
       commentEntity.setProperty("body", body);
       commentEntity.setProperty("email", email);
+      commentEntity.setProperty("score",score);
       commentEntity.setProperty("timestamp",timestamp);
 
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -67,14 +76,12 @@ public class DataServlet extends HttpServlet {
       String title;
       String body;
       String email;
-      long timestamp;
-      long id;
-      public Comment(String title, String body,String email, long timestamp, long id){
+      float score;
+      public Comment(String title, String body,String email, float score){
           this.title = title;
           this.body = body;
           this.email = email;
-          this.timestamp = timestamp;
-          this.id = id;
+          this.score = score;
       }
       public String getTitle(){
           return title;
@@ -85,11 +92,8 @@ public class DataServlet extends HttpServlet {
       public String getEmail(){
         return email;
       }
-      public long getTimestamp(){
-          return timestamp;
-      }
-      public long getId(){
-          return id;
+      public float getScore(){
+        return score;
       }
   }
 
@@ -142,9 +146,8 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
     String title = (String) entity.getProperty("title");
     String body = (String) entity.getProperty("body");
     String email = (String) entity.getProperty("email");
-    long timestamp = (long) entity.getProperty("timestamp");
-    long id = entity.getKey().getId();
-    Comment comment = new Comment(title, body, email, timestamp, id);
+    float score = (float) entity.getProperty("score");
+    Comment comment = new Comment(title, body, email, score);
     return comment;
 }
 }
