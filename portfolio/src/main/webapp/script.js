@@ -76,10 +76,10 @@ function createComment(titleText, bodyText, emailText,sentimentScore){
     body.appendChild(document.createTextNode(bodyText));
     comment.appendChild(body);
 
-    const score = document,createElement("p");
+    const score = document.createElement("p");
     score.className = "sentimentScore";
-    sentimentText = "this comment's sentiment score is: " + sentimentScore;
-    score.appendChild(sentimentText);
+    sentimentText = "Sentiment Score: " + sentimentScore.toFixed(2);
+    score.appendChild(document.createTextNode(sentimentText));
     comment.appendChild(score);
 
     return comment;
