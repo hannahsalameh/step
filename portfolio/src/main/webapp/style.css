@@ -251,6 +251,10 @@ hr{
   padding-top:0;
   font-size:12px;
 }
+.sentimentScore{
+  margin-left:10px;
+  font-size:10px;
+}
 #delete{
     margin-bottom: 20px;
     margin-top:20px;
