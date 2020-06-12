@@ -45,7 +45,9 @@ function displayComment(limValue){
         commentContainer = document.getElementById("comment_container");
         commentContainer.innerHTML = "";
         for(var i = 0; i < data.length; ++i){
-            commentContainer.appendChild(createComment(data[i].title, data[i].body, data[i].email));
+            commentContainer.appendChild(
+              createComment(data[i].title, data[i].body, data[i].email, data[i].score)
+            );
         }
     })
 }
@@ -55,7 +57,7 @@ function limitNumComments(){
     displayComment(limValue);
 }
 
-function createComment(titleText, bodyText, emailText){
+function createComment(titleText, bodyText, emailText,sentimentScore){
     const comment = document.createElement("div");
     comment.className = "comment";
 
@@ -73,6 +75,12 @@ function createComment(titleText, bodyText, emailText){
     body.className = "commentBody";
     body.appendChild(document.createTextNode(bodyText));
     comment.appendChild(body);
+
+    const score = document.createElement("p");
+    score.className = "sentimentScore";
+    sentimentText = "Sentiment Score: " + sentimentScore.toFixed(2);
+    score.appendChild(document.createTextNode(sentimentText));
+    comment.appendChild(score);
 
     return comment;
 }
