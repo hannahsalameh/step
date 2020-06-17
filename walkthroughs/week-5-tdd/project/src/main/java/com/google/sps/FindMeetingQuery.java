@@ -19,7 +19,6 @@ import java.util.*;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    System.out.print("\n Running code");
     ArrayList<Event> eventsArrayList = new ArrayList<Event>();
     Collection<TimeRange> meetingTimes = new ArrayList<>();
 
@@ -28,7 +27,6 @@ public final class FindMeetingQuery {
     }
     
     for(Event event: events){
-        System.out.print(checkAttending(event,request));
         if(checkAttending(event, request)){
             eventsArrayList.add(event);
         }
@@ -39,11 +37,10 @@ public final class FindMeetingQuery {
         return meetingTimes;
     }
 
-    Event[] eventsArray = eventsArrayList.toArray(new Event[eventsArrayList.size()]);
-    int latestEndTime = eventsArray[0].getWhen().end();
-    for(int i = 0; i < eventsArray.length; ++i){
+    int latestEndTime = eventsArrayList.get(0).getWhen().end();
+    for(int i = 0; i < eventsArrayList.size(); ++i){
         if(i == 0){
-            int firstEventStart = eventsArray[i].getWhen().start();
+            int firstEventStart = eventsArrayList.get(i).getWhen().start();
             if((firstEventStart - TimeRange.START_OF_DAY) >= request.getDuration()){
                 meetingTimes.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, firstEventStart, false));
             }
@@ -54,8 +51,8 @@ public final class FindMeetingQuery {
             }
         } //else here bc it should work if i = 0, but not if off the edge
         else{
-            TimeRange firstEvent = eventsArray[i].getWhen();
-            TimeRange secondEvent = eventsArray[i+1].getWhen();
+            TimeRange firstEvent = eventsArrayList.get(i).getWhen();
+            TimeRange secondEvent = eventsArrayList.get(i+1).getWhen();
             if((secondEvent.start() - firstEvent.end()) >= request.getDuration() && !firstEvent.overlaps(secondEvent)){
                 meetingTimes.add(TimeRange.fromStartEnd(firstEvent.end(),secondEvent.start(), false));
             }
@@ -63,7 +60,6 @@ public final class FindMeetingQuery {
                 latestEndTime = secondEvent.end();
             }
         }
-        System.out.print("latest time: " + latestEndTime);
     }
     return meetingTimes;
   }
