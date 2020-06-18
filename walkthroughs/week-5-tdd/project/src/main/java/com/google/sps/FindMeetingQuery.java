@@ -32,37 +32,41 @@ public final class FindMeetingQuery {
         }
     }
 
-    if(request.getAttendees().size() == 0 || eventsArrayList.size() == 0){
+    if(eventsArrayList.size() == 0){
         meetingTimes.add(TimeRange.WHOLE_DAY);
         return meetingTimes;
     }
 
+    //sort by begin time
+    //eventsArrayList could be more specific 
+    //initialize > populate, not initialize > initilaize > populate
+
+    //check first event start time against beginning of day
+    int firstEventStart = eventsArrayList.get(0).getWhen().start();
+    if((firstEventStart - TimeRange.START_OF_DAY) >= request.getDuration()){
+        meetingTimes.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, firstEventStart, false));
+    }
+
     int latestEndTime = eventsArrayList.get(0).getWhen().end();
-    for(int i = 0; i < eventsArrayList.size(); ++i){
-        if(i == 0){
-            int firstEventStart = eventsArrayList.get(i).getWhen().start();
-            if((firstEventStart - TimeRange.START_OF_DAY) >= request.getDuration()){
-                meetingTimes.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, firstEventStart, false));
-            }
+    //checks all middle events to see if there is enough time between them
+    for(int i = 1; i < eventsArrayList.size()-1; ++i){
+        TimeRange firstEvent = eventsArrayList.get(i).getWhen();
+        TimeRange secondEvent = eventsArrayList.get(i+1).getWhen();
+        if((secondEvent.start() - firstEvent.end()) >= request.getDuration() && !firstEvent.overlaps(secondEvent)){
+            meetingTimes.add(TimeRange.fromStartEnd(firstEvent.end(),secondEvent.start(), false));
         }
-        if(i == eventsArray.length - 1){
-            if((TimeRange.END_OF_DAY - latestEndTime) >= request.getDuration()){
-                 meetingTimes.add(TimeRange.fromStartEnd(latestEndTime, TimeRange.END_OF_DAY, true));
-            }
-        } //else here bc it should work if i = 0, but not if off the edge
-        else{
-            TimeRange firstEvent = eventsArrayList.get(i).getWhen();
-            TimeRange secondEvent = eventsArrayList.get(i+1).getWhen();
-            if((secondEvent.start() - firstEvent.end()) >= request.getDuration() && !firstEvent.overlaps(secondEvent)){
-                meetingTimes.add(TimeRange.fromStartEnd(firstEvent.end(),secondEvent.start(), false));
-            }
-            if(secondEvent.end() > latestEndTime){
-                latestEndTime = secondEvent.end();
-            }
+        if(secondEvent.end() > latestEndTime){
+            latestEndTime = secondEvent.end();
         }
+    }
+
+    //check end time of lastest event against end of day
+    if((TimeRange.END_OF_DAY - latestEndTime) >= request.getDuration()){
+        meetingTimes.add(TimeRange.fromStartEnd(latestEndTime, TimeRange.END_OF_DAY, true));
     }
     return meetingTimes;
   }
+
   private boolean checkAttending(Event event, MeetingRequest request){
     Set<String> intersection = new HashSet<String>(event.getAttendees());
     intersection.retainAll(request.getAttendees());
