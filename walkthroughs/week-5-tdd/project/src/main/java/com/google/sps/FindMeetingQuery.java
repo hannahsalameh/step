@@ -24,14 +24,27 @@ public final class FindMeetingQuery {
     if(request.getDuration() > TimeRange.WHOLE_DAY.duration()){
         return meetingTimes;
     }
-    
-    ArrayList<TimeRange> conflictingEventTimes = new ArrayList<TimeRange>();
+
+    boolean countOptional = true;
+
+    meetingTimes = populateMeetingTimes(events, request, countOptional);
+    if(meetingTimes.size() == 0  && !request.getAttendees().isEmpty()){
+        countOptional = false;
+        meetingTimes = populateMeetingTimes(events, request, countOptional);
+    }
+    return meetingTimes;
+  }
+
+  private Collection<TimeRange> populateMeetingTimes(Collection<Event> events, MeetingRequest request, boolean countOptional){
+      Collection<TimeRange> meetingTimes = new ArrayList<>();
+      ArrayList<TimeRange> conflictingEventTimes = new ArrayList<TimeRange>();
+
     for(Event event: events){
-        if(checkAttending(event, request)){
+        if(checkAttending(event, request,countOptional)){
             conflictingEventTimes.add(event.getWhen());
         }
     }
-    
+
     if(conflictingEventTimes.size() == 0){
         meetingTimes.add(TimeRange.WHOLE_DAY);
         return meetingTimes;
@@ -50,6 +63,9 @@ public final class FindMeetingQuery {
     for(int i = 0; i < conflictingEventTimes.size()-1; ++i){
         TimeRange firstEvent = conflictingEventTimes.get(i);
         TimeRange secondEvent = conflictingEventTimes.get(i+1);
+        if(firstEvent == TimeRange.WHOLE_DAY || secondEvent == TimeRange.WHOLE_DAY){
+            return meetingTimes;
+        }
         if((secondEvent.start() - firstEvent.end()) >= request.getDuration() && !firstEvent.overlaps(secondEvent)){
             meetingTimes.add(TimeRange.fromStartEnd(firstEvent.end(),secondEvent.start(), false));
         }
@@ -65,9 +81,13 @@ public final class FindMeetingQuery {
     return meetingTimes;
   }
 
-  private boolean checkAttending(Event event, MeetingRequest request){
+  private boolean checkAttending(Event event, MeetingRequest request, boolean countOptional){
     Set<String> intersection = new HashSet<String>(event.getAttendees());
     intersection.retainAll(request.getAttendees());
+    if(intersection.size() == 0 && countOptional){
+        intersection = new HashSet<String>(event.getAttendees());
+        intersection.retainAll(request.getOptionalAttendees());
+    }
      if(intersection.size() > 0){
          return true;
      }
