@@ -19,39 +19,37 @@ import java.util.*;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    ArrayList<Event> eventsArrayList = new ArrayList<Event>();
     Collection<TimeRange> meetingTimes = new ArrayList<>();
 
     if(request.getDuration() > TimeRange.WHOLE_DAY.duration()){
         return meetingTimes;
     }
     
+    ArrayList<TimeRange> conflictingEventTimes = new ArrayList<TimeRange>();
     for(Event event: events){
         if(checkAttending(event, request)){
-            eventsArrayList.add(event);
+            conflictingEventTimes.add(event.getWhen());
         }
     }
-
-    if(eventsArrayList.size() == 0){
+    
+    if(conflictingEventTimes.size() == 0){
         meetingTimes.add(TimeRange.WHOLE_DAY);
         return meetingTimes;
     }
 
-    //sort by begin time
-    //eventsArrayList could be more specific 
-    //initialize > populate, not initialize > initilaize > populate
+    Collections.sort(conflictingEventTimes, TimeRange.ORDER_BY_START);
 
     //check first event start time against beginning of day
-    int firstEventStart = eventsArrayList.get(0).getWhen().start();
+    int firstEventStart = conflictingEventTimes.get(0).start();
     if((firstEventStart - TimeRange.START_OF_DAY) >= request.getDuration()){
         meetingTimes.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, firstEventStart, false));
     }
 
-    int latestEndTime = eventsArrayList.get(0).getWhen().end();
+    int latestEndTime = conflictingEventTimes.get(0).end();
     //checks all middle events to see if there is enough time between them
-    for(int i = 1; i < eventsArrayList.size()-1; ++i){
-        TimeRange firstEvent = eventsArrayList.get(i).getWhen();
-        TimeRange secondEvent = eventsArrayList.get(i+1).getWhen();
+    for(int i = 0; i < conflictingEventTimes.size()-1; ++i){
+        TimeRange firstEvent = conflictingEventTimes.get(i);
+        TimeRange secondEvent = conflictingEventTimes.get(i+1);
         if((secondEvent.start() - firstEvent.end()) >= request.getDuration() && !firstEvent.overlaps(secondEvent)){
             meetingTimes.add(TimeRange.fromStartEnd(firstEvent.end(),secondEvent.start(), false));
         }
