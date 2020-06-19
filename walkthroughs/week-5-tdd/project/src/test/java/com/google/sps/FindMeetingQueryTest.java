@@ -54,7 +54,7 @@ public final class FindMeetingQueryTest {
   @Before
   public void setUp() {
     query = new FindMeetingQuery();
-  }
+  } 
 
   @Test
   public void optionsForNoAttendees() {
