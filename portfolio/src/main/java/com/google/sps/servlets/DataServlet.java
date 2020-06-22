@@ -27,6 +27,9 @@ import com.google.cloud.language.v1.Sentiment;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +41,21 @@ import com.google.appengine.api.users.UserServiceFactory;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/comments")
 public class DataServlet extends HttpServlet {
+  private LanguageServiceClient languageService;
+  private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+  private final UserService userService  = UserServiceFactory.getUserService();
+
+  @Override
+  public void init(){
+    try{
+        languageService = LanguageServiceClient.create();
+    } catch(IOException e){
+      System.err.println("Cannot initialize LanguageServiceClient");
+    }
+  }
+
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    UserService userService = UserServiceFactory.getUserService();
     if(userService.isUserLoggedIn()){
       String title = getParameter(request,"title", "");
       String body = getParameter(request,"comment", "");
@@ -49,20 +64,18 @@ public class DataServlet extends HttpServlet {
 
       Document doc =
         Document.newBuilder().setContent(body).setType(Document.Type.PLAIN_TEXT).build();
-      LanguageServiceClient languageService = LanguageServiceClient.create();
       Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
       double score = sentiment.getScore();
-      languageService.close();
 
 
       Entity commentEntity = new Entity("comment");
-      commentEntity.setProperty("title",title);
+      commentEntity.setProperty("title", title);
       commentEntity.setProperty("body", body);
       commentEntity.setProperty("email", email);
-      commentEntity.setProperty("score",score);
-      commentEntity.setProperty("timestamp",timestamp);
+      commentEntity.setProperty("score", score);
+      commentEntity.setProperty("timestamp", timestamp);
 
-      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
       datastore.put(commentEntity);
       response.sendRedirect("/feedback.html");
     }
@@ -105,7 +118,6 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
   UserService userService = UserServiceFactory.getUserService();
     Query query = new Query("comment").addSort("timestamp", SortDirection.DESCENDING);
 
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
     int numQueries = getLimit(request);

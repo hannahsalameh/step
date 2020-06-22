@@ -59,7 +59,13 @@ function limitNumComments(){
 
 function createComment(titleText, bodyText, emailText,sentimentScore){
     const comment = document.createElement("div");
-    comment.className = "comment";
+    if(sentimentScore.toFixed(1) > .3){
+      comment.className = "comment posComment";
+    } else if (sentimentScore.toFixed(1) <=.3 && sentimentScore.toFixed(1) >= -.3) {
+      comment.className = "comment neuComment";
+    } else {
+      comment.className = "comment negComment";
+    }
 
     const title = document.createElement("h3");
     title.className = "commentTitle";
