@@ -215,6 +215,9 @@ hr{
 }
 
 /* ----FEEDBACK PAGE----*/
+#comment_form{
+  display:none;
+}
 #comment_container{
     background-color: #fdcb9e;
     border-left: 1px solid #3f3f44;
@@ -242,7 +245,19 @@ hr{
 .commentBody{
     margin-left:10px;
 }
+.userEmail{
+  margin-left:10px;
+  margin-top:0;
+  padding-top:0;
+  font-size:12px;
+}
 #delete{
     margin-bottom: 20px;
     margin-top:20px;
+    display:none;
+}
+
+/* -- MAPS -- */
+#map{
+  height:100%;
 }
