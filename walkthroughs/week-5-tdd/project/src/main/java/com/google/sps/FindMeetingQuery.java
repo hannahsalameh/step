@@ -25,12 +25,10 @@ public final class FindMeetingQuery {
         return meetingTimes;
     }
 
-    boolean countOptional = true;
 
-    meetingTimes = populateMeetingTimes(events, request, countOptional);
+    meetingTimes = populateMeetingTimes(events, request, true);
     if(meetingTimes.size() == 0  && !request.getAttendees().isEmpty()){
-        countOptional = false;
-        meetingTimes = populateMeetingTimes(events, request, countOptional);
+        meetingTimes = populateMeetingTimes(events, request, false);
     }
     return meetingTimes;
   }
